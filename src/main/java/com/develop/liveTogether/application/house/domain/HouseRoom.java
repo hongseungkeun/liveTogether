@@ -2,6 +2,7 @@ package com.develop.liveTogether.application.house.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +31,7 @@ public class HouseRoom {
 	@JoinColumn(name = "houseNumber")
 	private House house;
 
+	@Builder
 	public HouseRoom(Long roomNumber, String roomName,
 					 String roomPersonType, String roomGender,
 					 int roomDeposit, int roomMonthly,

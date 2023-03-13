@@ -4,6 +4,7 @@ import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.domain.HouseRoom;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -24,19 +25,20 @@ public class RoomGuest {
 	private Member member;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "houseNumber")
-	private House houseNumber;
+	private House house;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "roomNumber")
-	private HouseRoom roomNumber;
+	private HouseRoom houseRoom;
 
+	@Builder
 	public RoomGuest(Long roomGuestNumber, int status,
-					 Member member, House houseNumber,
-					 HouseRoom roomNumber)
+					 Member member, House house,
+					 HouseRoom houseRoom)
 	{
 		this.roomGuestNumber = roomGuestNumber;
 		this.status = status;
 		this.member = member;
-		this.houseNumber = houseNumber;
-		this.roomNumber = roomNumber;
+		this.house = house;
+		this.houseRoom = houseRoom;
 	}
 }
