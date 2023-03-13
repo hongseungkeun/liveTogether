@@ -21,4 +21,14 @@ public class Address {
     @Column(nullable = false)
     private double longitude;
 
+    public Address(String houseAddress, String houseAddressDetail,
+                   String houseLocation, double latitude,
+                   double longitude)
+    {
+        this.houseAddress = houseAddress;
+        this.houseAddressDetail = houseAddressDetail;
+        this.houseLocation = houseLocation;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
