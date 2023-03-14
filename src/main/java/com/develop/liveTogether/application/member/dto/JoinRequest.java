@@ -10,9 +10,9 @@ public record JoinRequest(@NotBlank String memberId, @NotBlank String memberPw,
                           @NotBlank String memberPhone, @NotBlank String memberGender,
                           @NotBlank String memberProfile, @NotBlank String memberRole)
 {
-    public Member toMember(){
+    public Member toMember(String memberPw){
         return new Member(
-                this.memberId, Base64.getEncoder().encodeToString(this.memberPw.getBytes()),
+                this.memberId, memberPw,
                 this.memberName, this.memberNickname,
                 this.memberPhone,this.memberGender,
                 this.memberProfile,this.memberRole);
