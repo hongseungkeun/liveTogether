@@ -1,11 +1,13 @@
 package com.develop.liveTogether.application.member.service;
 
 import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.member.dto.FindIdRequest;
 import com.develop.liveTogether.application.member.dto.JoinRequest;
 import com.develop.liveTogether.application.member.dto.LoginRequest;
 import com.develop.liveTogether.application.member.exception.DuplicatedMemberIdException;
 import com.develop.liveTogether.application.member.exception.DuplicatedNicknameException;
 import com.develop.liveTogether.application.member.exception.LoginFailedException;
+import com.develop.liveTogether.application.member.exception.MemberNotFoundException;
 import com.develop.liveTogether.application.member.repository.MemberRepository;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,13 @@ public class MemberService {
         Member member = isPossibleLogin(request.memberId(), encodeMemberPw(request.memberPw()));
     }
 
+    public String findId(FindIdRequest request) {
+        Member member = memberRepository.findByMemberNameAndMemberPhone(request.memberName(), request.memberPhone())
+                .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+
+        return member.getMemberId();
+    }
+
     private String encodeMemberPw(String memberPw){
         return Base64.getEncoder().encodeToString(memberPw.getBytes());
     }
@@ -46,6 +55,7 @@ public class MemberService {
         if(memberRepository.existsById(memberId)){
             throw new DuplicatedMemberIdException(ErrorCode.EXIST_MEMBER_ID);
         }
+
         if(memberRepository.existsByNickname(memberNickname)){
             throw new DuplicatedNicknameException(ErrorCode.EXIST_MEMBER_NICKNAME);
         }

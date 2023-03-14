@@ -1,5 +1,6 @@
 package com.develop.liveTogether.application.member.controller;
 
+import com.develop.liveTogether.application.member.dto.FindIdRequest;
 import com.develop.liveTogether.application.member.dto.JoinRequest;
 import com.develop.liveTogether.application.member.dto.LoginRequest;
 import com.develop.liveTogether.application.member.service.MemberService;
@@ -27,6 +28,7 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @PostMapping("/login")
     public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request){
         memberService.login(request);
 
@@ -37,8 +39,11 @@ public class MemberController {
 
     }
 
-    public void findId(){
+    @PostMapping("/findId")
+    public ResponseEntity<String> findId(@Valid @RequestBody FindIdRequest request){
+        String memberId = memberService.findId(request);
 
+        return ResponseEntity.ok(memberId);
     }
 
     public void findPw(){
