@@ -27,8 +27,10 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    public void login(@Valid @RequestBody LoginRequest request){
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request){
         memberService.login(request);
+
+        return ResponseEntity.ok().build();
     }
 
     public void logout(){
