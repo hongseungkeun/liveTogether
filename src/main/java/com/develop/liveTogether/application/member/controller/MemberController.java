@@ -1,8 +1,8 @@
 package com.develop.liveTogether.application.member.controller;
 
-import com.develop.liveTogether.application.member.dto.FindIdRequest;
-import com.develop.liveTogether.application.member.dto.JoinRequest;
-import com.develop.liveTogether.application.member.dto.LoginRequest;
+import com.develop.liveTogether.application.member.data.SuccessMessage;
+import com.develop.liveTogether.application.member.dto.request.*;
+import com.develop.liveTogether.application.member.dto.response.SuccessResponse;
 import com.develop.liveTogether.application.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -35,19 +35,37 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    public void logout(){
-
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(){
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/findId")
+    @PostMapping("/valid/id")
+    public ResponseEntity<SuccessResponse> validateId(@Valid @RequestBody ValidateIdRequest request){
+        memberService.isDuplicatedMemberId(request.memberId());
+
+        return ResponseEntity.ok(new SuccessResponse(SuccessMessage.AVAILABLE_ID.getMessage()));
+    }
+
+    @PostMapping("/valid/nickName")
+    public ResponseEntity<SuccessResponse> validateNickname(@Valid @RequestBody ValidateNicknameRequest request){
+        memberService.isDuplicatedMemberNickname(request.memberNickname());
+
+        return ResponseEntity.ok(new SuccessResponse(SuccessMessage.AVAILABLE_NICKNAME.getMessage()));
+    }
+
+    @PostMapping("/find/id")
     public ResponseEntity<String> findId(@Valid @RequestBody FindIdRequest request){
         String memberId = memberService.findId(request);
 
         return ResponseEntity.ok(memberId);
     }
 
-    public void findPw(){
+    @PostMapping("/find/pw")
+    public ResponseEntity<String> findPw(@Valid @RequestBody FindPwRequest request){
+        memberService.findPw(request);
 
+        return ResponseEntity.ok().build();
     }
 
 }
