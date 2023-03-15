@@ -1,4 +1,4 @@
-package com.develop.liveTogether.application.member.dto;
+package com.develop.liveTogether.application.member.dto.request;
 
 import com.develop.liveTogether.application.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;

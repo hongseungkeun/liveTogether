@@ -1,9 +1,10 @@
 package com.develop.liveTogether.application.member.service;
 
 import com.develop.liveTogether.application.member.domain.Member;
-import com.develop.liveTogether.application.member.dto.FindIdRequest;
-import com.develop.liveTogether.application.member.dto.JoinRequest;
-import com.develop.liveTogether.application.member.dto.LoginRequest;
+import com.develop.liveTogether.application.member.dto.request.FindIdRequest;
+import com.develop.liveTogether.application.member.dto.request.FindPwRequest;
+import com.develop.liveTogether.application.member.dto.request.JoinRequest;
+import com.develop.liveTogether.application.member.dto.request.LoginRequest;
 import com.develop.liveTogether.application.member.exception.DuplicatedMemberIdException;
 import com.develop.liveTogether.application.member.exception.DuplicatedNicknameException;
 import com.develop.liveTogether.application.member.exception.LoginFailedException;
@@ -23,6 +24,8 @@ public class MemberService {
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
+
+    @Transactional
     public void signUp(JoinRequest request) {
         isDuplicated(request.memberId(), request.memberNickname());
 
@@ -42,6 +45,28 @@ public class MemberService {
         return member.getMemberId();
     }
 
+    public void findPw(FindPwRequest request) {
+        Member member = memberRepository.findByMemberIdAndMemberPhone(request.memberId(), request.memberPhone())
+                .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+    }
+
+    public void isDuplicatedMemberId(String memberId) {
+        if(memberRepository.existsById(memberId)){
+            throw new DuplicatedMemberIdException(ErrorCode.EXIST_MEMBER_ID);
+        }
+    }
+
+    public void isDuplicatedMemberNickname(String memberNickname) {
+        if(memberRepository.existsByMemberNickname(memberNickname)){
+            throw new DuplicatedNicknameException(ErrorCode.EXIST_MEMBER_NICKNAME);
+        }
+    }
+
+    private void isDuplicated(String memberId, String memberNickname){
+        isDuplicatedMemberId(memberId);
+        isDuplicatedMemberNickname(memberNickname);
+    }
+
     private String encodeMemberPw(String memberPw){
         return Base64.getEncoder().encodeToString(memberPw.getBytes());
     }
@@ -49,16 +74,6 @@ public class MemberService {
     private Member findMemberById(String memberId){
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
-    }
-
-    private void isDuplicated(String memberId, String memberNickname) {
-        if(memberRepository.existsById(memberId)){
-            throw new DuplicatedMemberIdException(ErrorCode.EXIST_MEMBER_ID);
-        }
-
-        if(memberRepository.existsByNickname(memberNickname)){
-            throw new DuplicatedNicknameException(ErrorCode.EXIST_MEMBER_NICKNAME);
-        }
     }
 
     private Member isPossibleLogin(String memberId, String requestMemberPw) {
