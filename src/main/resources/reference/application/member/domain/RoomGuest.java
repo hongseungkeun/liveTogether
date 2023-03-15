@@ -1,9 +1,10 @@
-package com.develop.liveTogether.application.board.domain;
+package com.develop.liveTogether.application.member.domain;
 
 import com.develop.liveTogether.application.house.domain.House;
-import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.house.domain.HouseRoom;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -13,16 +14,11 @@ import org.hibernate.annotations.DynamicInsert;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
-public class Inquiry {
+public class RoomGuest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long inquiryNumber;
-	@Column(nullable = false)
-	private String inquiryContent;
-	@Column(nullable = false)
-	private String inquiryResponse;
-	private String typeOption;
-	@ColumnDefault("'N'")
+	private Long roomGuestNumber;
+	@ColumnDefault("'0'")
 	private int status;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "memberNumber")
@@ -30,18 +26,19 @@ public class Inquiry {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "houseNumber")
 	private House house;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "roomNumber")
+	private HouseRoom houseRoom;
 
-	public Inquiry(Long inquiryNumber, String inquiryContent,
-				   String inquiryResponse, String typeOption,
-				   int status, Member member,
-				   House house)
+	@Builder
+	public RoomGuest(Long roomGuestNumber, int status,
+					 Member member, House house,
+					 HouseRoom houseRoom)
 	{
-		this.inquiryNumber = inquiryNumber;
-		this.inquiryContent = inquiryContent;
-		this.inquiryResponse = inquiryResponse;
-		this.typeOption = typeOption;
+		this.roomGuestNumber = roomGuestNumber;
 		this.status = status;
 		this.member = member;
 		this.house = house;
+		this.houseRoom = houseRoom;
 	}
 }
