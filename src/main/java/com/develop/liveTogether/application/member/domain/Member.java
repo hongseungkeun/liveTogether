@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
+	@Id
 	@Column(nullable = false)
 	private String memberId;
 	@Column(nullable = false)
