@@ -64,15 +64,15 @@
 						</c:choose>
 					</tbody>
 				</table>
-
+				
 				<c:choose>
-					<c:when test="${memberType eq 'a'}">
-						<div id="writeWrap">
-							<button type="button" id="writeBtn"
-								onclick="location.href='${pageContext.request.contextPath}/board/BoardWrite.bo'">글
-								작성</button>
-						</div>
-					</c:when>
+				<c:when test="${memberType eq 'a'}">
+				<div id="writeWrap">
+					<button type="button" id="writeBtn"
+						onclick="location.href='${pageContext.request.contextPath}/board/BoardWrite.bo'">글
+						작성</button>
+				</div>
+				</c:when>
 				</c:choose>
 
 				<!-- 페이징 처리 -->

@@ -35,7 +35,7 @@
 				<div class="filter">
 					<form name="searchForm" id="searchForm"
 						action="${pageContext.request.contextPath}/house/FindRoomOk.ho">
-						<div id="fil0ter-container">
+						<div id="filter-container">
 							<div id="input-wrap" class="flex_wrap">
 								<div id="hash-tag">
 									<span>#</span>

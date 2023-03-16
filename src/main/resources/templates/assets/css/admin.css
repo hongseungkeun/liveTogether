@@ -20,10 +20,6 @@ div#notice{
 	margin-left: 15px !important;
 }
 
-div.ready{
-	color: white;
-}
-
 
 @font-face {
 	font-family: 'GmarketSansMedium';
@@ -141,16 +137,9 @@ div#admin-whole-wrapper div#guest-div, div#admin-whole-wrapper div#host-div
 }
 
 div#admin-whole-wrapper div#navigation {
-	display: flex;
-    flex-direction: column;
-    justify-content: space-between;	
-    text-align: center;
-    font-size: 30px;
 	width: 13%;
 	height: 91.6vh;
 	background-color: #445163;
-	font-family: 'GmarketSansMedium';
-	letter-spacing: 10px;
 }
 
 div#admin-whole-wrapper {

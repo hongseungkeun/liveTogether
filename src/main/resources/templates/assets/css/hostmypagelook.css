@@ -67,7 +67,6 @@
    text-align: center;
    margin-bottom: 1rem;
    overflow: hidden;
-   font-size: 15px;
 }
 
 #change_info .content-wrapper .content .info-form .agreement-list .agreement .agreement-content .content
@@ -260,20 +259,14 @@ div#navigation_wraper {
     height: 64px;
     margin: 0 auto;
 }
-/* #change_info .user_pro{
+#change_info .user_pro{
    width:70%;
    line-height:80px;
    font-size:15px;
-   text-decoration:underline;  
-   padding-bottom:3px;
-   border-bottom:0.5px solid;
-} */
-#change_info .user_pro{
-   width:70%;
-   font-size:15px;
-   padding-top: 20px;
+   /* text-decoration:underline;  
+   padding-bottom:3px; */
+   /* border-bottom:0.5px solid; */
 }
-    
 
 .mypagelook #box {
     display: flex;
@@ -289,10 +282,9 @@ div#navigation_wraper {
 }
 
 #change_info .user_nickname{
-        margin: 0;
-    line-height: 82px;
+      margin: 0;
+    line-height: 84px;
     text-align: left;
-    font-size: 15px;
 }
 #change_info .column-wrapper .col06{
    margin-right: 3rem;

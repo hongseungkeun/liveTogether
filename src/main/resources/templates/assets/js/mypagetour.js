@@ -15,6 +15,8 @@ if (status == '0') {
 	$(".myconheader4").css('display', 'none');
 }
 if (status == '1') {
+	console.log(status);
+	console.log(tourWait[1]);
 	tourWait[0].classList.add('active');
 	tourWait[1].classList.add('active1');
 	tourOk[0].classList.remove('active')

@@ -93,6 +93,7 @@ success();
 // 스크롤 위치에 따라 액티브클래스(색변경) 주기
 $(window).scroll(function(){ 
     var scrollValue = $(document).scrollTop();
+    console.log(scrollValue);
     if (matchMedia("screen and (min-width: 415px)").matches){ 
        if(scrollValue > 1119){
           $("div.intro").addClass("introfix");
@@ -216,7 +217,7 @@ btns.forEach(function(value, index, ar){
            $(this).addClass("active");        
            count = index;
            if (matchMedia("screen and (min-width: 415px)").matches){ 
-               banner.style.transform = "translate(-" + count * 1046 + "px)";
+               banner.style.transform = "translate(-" + count * 952 + "px)";
                }else{
                   banner.style.transform = "translate(-" + count * 352 + "px)";
                }
@@ -246,7 +247,7 @@ arrows.forEach((arrow) => {
         }
     }
     if (matchMedia("screen and (min-width: 415px)").matches){ 
-    banner.style.transform = "translate(-" + count * 1046 + "px)";
+    banner.style.transform = "translate(-" + count * 952 + "px)";
     }else{
        banner.style.transform = "translate(-" + count * 352 + "px)";
     }

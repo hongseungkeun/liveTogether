@@ -387,8 +387,8 @@
 		from
 		tbl_house h
 		join tbl_houseroom r
-		on h.houseNumber = r.houseNumber and memberId = #{memberId}
-		group by 1
+		on memberId = #{memberId}
+		group by houseNumber
 	</select>
 
 	<!-- 페이징 처리 위한 게시글 갯수 가져오기 -->

@@ -5,17 +5,17 @@
 	<typeAliases>
 		<typeAlias type="com.liveTogether.app.member.vo.MemberVO" alias="memberVO"/>
 		<typeAlias type="com.liveTogether.app.member.vo.RoomGuestDTO" alias="roomGuestDTO"/>
-		<typeAlias type="com.liveTogether.app.board.vo.Board" alias="boardVO"/>
+		<typeAlias type="com.liveTogether.app.board.vo.BoardVO" alias="boardVO"/>
 		<typeAlias type="com.liveTogether.app.house.vo.HouseVO" alias="houseVO"/>
-		<typeAlias type="com.develop.liveTogether.application.house.dto.HouseDTO" alias="houseDTO"/>
-		<typeAlias type="com.liveTogether.app.house.vo.HouseFile" alias="houseFileVO"/>
-		<typeAlias type="com.liveTogether.app.house.vo.HouseRoom" alias="houseRoomVO"/>
-		<typeAlias type="com.liveTogether.app.board.vo.BoardFile" alias="filesVO"/>
-		<typeAlias type="com.develop.liveTogether.application.board.dto.BoardDTO" alias="boardDTO"/>
-		<typeAlias type="com.develop.liveTogether.application.house.dto.HouseFilterDTO" alias="filterDTO"/>
+		<typeAlias type="com.liveTogether.app.house.vo.HouseDTO" alias="houseDTO"/>
+		<typeAlias type="com.liveTogether.app.house.vo.HouseFileVO" alias="houseFileVO"/>
+		<typeAlias type="com.liveTogether.app.house.vo.HouseRoomVO" alias="houseRoomVO"/>
+		<typeAlias type="com.liveTogether.app.board.vo.FilesVO" alias="filesVO"/>
+		<typeAlias type="com.liveTogether.app.board.vo.BoardDTO" alias="boardDTO"/>
+		<typeAlias type="com.liveTogether.app.house.vo.HouseFilterDTO" alias="filterDTO"/>
 		<typeAlias type="com.liveTogether.app.member.vo.MyRoomGuestDTO" alias="myRoomGuestDTO"/>
 		<typeAlias type="com.liveTogether.app.member.vo.RoomGuestVO" alias="roomGuestVO"/>
-		<typeAlias type="com.develop.liveTogether.application.house.dto.HouseMemberDTO" alias="houseMemberDTO"/>
+		<typeAlias type="com.liveTogether.app.house.vo.HouseMemberDTO" alias="houseMemberDTO"/>
 		<typeAlias type="com.liveTogether.app.board.vo.InquiryVO" alias="inquiryVO"/>
 		
 	</typeAliases>

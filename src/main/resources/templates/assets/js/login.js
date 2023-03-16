@@ -27,7 +27,7 @@ $(document).ready(function() {
             deleteCookie("setCookieYN");
         }
         
-        document.form.submit();
+        document.fform.submit();
     });
 });
 

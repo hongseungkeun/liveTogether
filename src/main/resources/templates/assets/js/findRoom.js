@@ -213,6 +213,8 @@ $("#findbtn").on("click", function findList() {
 
 // 조건검색한 후 방들 써주기
 function showRoomList(rooms) {
+	console.log(rooms);
+	console.log("들어옴")
 	var text = "";
 	if (rooms != null && rooms.length != 0) {
 		$

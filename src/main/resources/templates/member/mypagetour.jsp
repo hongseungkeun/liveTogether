@@ -132,7 +132,7 @@ input[type="radio"]+label:before {
 
 
 		<c:choose>
-			<c:when test="${total eq 1}">
+			<c:when test="${total eq 0}">
 
 				<div class="mypage">
 
