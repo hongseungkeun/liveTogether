@@ -1,10 +1,7 @@
 package com.develop.liveTogether.application.member.service;
 
 import com.develop.liveTogether.application.member.domain.Member;
-import com.develop.liveTogether.application.member.dto.request.FindIdRequest;
-import com.develop.liveTogether.application.member.dto.request.FindPwRequest;
-import com.develop.liveTogether.application.member.dto.request.JoinRequest;
-import com.develop.liveTogether.application.member.dto.request.LoginRequest;
+import com.develop.liveTogether.application.member.dto.request.*;
 import com.develop.liveTogether.application.member.exception.DuplicatedMemberIdException;
 import com.develop.liveTogether.application.member.exception.DuplicatedNicknameException;
 import com.develop.liveTogether.application.member.exception.LoginFailedException;
@@ -34,8 +31,9 @@ public class MemberService {
         memberRepository.save(member);
     }
 
-    public void login(LoginRequest request){
+    public String login(LoginRequest request){
         Member member = isPossibleLogin(request.memberId(), encodeMemberPw(request.memberPw()));
+        return member.getMemberId();
     }
 
     public String findId(FindIdRequest request) {
@@ -48,6 +46,11 @@ public class MemberService {
     public void findPw(FindPwRequest request) {
         Member member = memberRepository.findByMemberIdAndMemberPhone(request.memberId(), request.memberPhone())
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+    }
+
+    public void changePw(ChangePwRequest request) {
+        Member member = findMemberById(request.memberId());
+        member.changePassword(encodeMemberPw(request.memberPw()));
     }
 
     public void isDuplicatedMemberId(String memberId) {
@@ -67,6 +70,16 @@ public class MemberService {
         isDuplicatedMemberNickname(memberNickname);
     }
 
+    private Member isPossibleLogin(String memberId, String requestMemberPw) {
+        Member member = findMemberById(memberId);
+
+        if(!member.getMemberPw().equals(requestMemberPw)){
+            throw new LoginFailedException(ErrorCode.LOGIN_FAILED);
+        }
+
+        return member;
+    }
+
     private String encodeMemberPw(String memberPw){
         return Base64.getEncoder().encodeToString(memberPw.getBytes());
     }
@@ -74,16 +87,5 @@ public class MemberService {
     private Member findMemberById(String memberId){
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
-    }
-
-    private Member isPossibleLogin(String memberId, String requestMemberPw) {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
-
-        if(!member.getMemberPw().equals(requestMemberPw)){
-            throw new LoginFailedException(ErrorCode.LOGIN_FAILED);
-        }
-
-        return member;
     }
 }
