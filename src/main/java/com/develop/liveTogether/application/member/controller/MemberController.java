@@ -1,9 +1,10 @@
 package com.develop.liveTogether.application.member.controller;
 
-import com.develop.liveTogether.application.member.data.SuccessMessage;
 import com.develop.liveTogether.application.member.dto.request.*;
-import com.develop.liveTogether.application.member.dto.response.SuccessResponse;
 import com.develop.liveTogether.application.member.service.MemberService;
+import com.develop.liveTogether.global.util.SessionUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,29 +30,32 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request){
-        memberService.login(request);
+    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request, HttpServletRequest httpServletRequest){
+        String memberId = memberService.login(request);
+        SessionUtil.createSession(memberId, httpServletRequest);
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(){
+    public ResponseEntity<Void> logout(HttpSession session){
+        SessionUtil.removeSession(session);
+
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/valid/id")
-    public ResponseEntity<SuccessResponse> validateId(@Valid @RequestBody ValidateIdRequest request){
+    public ResponseEntity<Void> validateId(@Valid @RequestBody ValidateIdRequest request){
         memberService.isDuplicatedMemberId(request.memberId());
 
-        return ResponseEntity.ok(new SuccessResponse(SuccessMessage.AVAILABLE_ID.getMessage()));
+        ResponseEntity.ok().build();
     }
 
     @PostMapping("/valid/nickName")
-    public ResponseEntity<SuccessResponse> validateNickname(@Valid @RequestBody ValidateNicknameRequest request){
+    public ResponseEntity<Void> validateNickname(@Valid @RequestBody ValidateNicknameRequest request){
         memberService.isDuplicatedMemberNickname(request.memberNickname());
 
-        return ResponseEntity.ok(new SuccessResponse(SuccessMessage.AVAILABLE_NICKNAME.getMessage()));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/find/id")
@@ -68,4 +72,10 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/find/changePw")
+    public ResponseEntity<String> findPw(@Valid @RequestBody ChangePwRequest request){
+        memberService.changePw(request);
+
+        return ResponseEntity.ok().build();
+    }
 }

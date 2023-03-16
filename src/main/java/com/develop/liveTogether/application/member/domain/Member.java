@@ -28,6 +28,10 @@ public class Member {
 	@Column(nullable = false)
 	private String memberRole;
 
+	public void changePassword(String newPassword){
+		this.memberPw = newPassword;
+	}
+
 	@Builder
 	public Member(String memberId, String memberPw,
 				  String memberName, String memberNickname,
