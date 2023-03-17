@@ -65,6 +65,11 @@ public class MemberService {
         }
     }
 
+    public Member findMemberById(String memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
+    }
+
     private void isDuplicated(String memberId, String memberNickname){
         isDuplicatedMemberId(memberId);
         isDuplicatedMemberNickname(memberNickname);
@@ -82,10 +87,5 @@ public class MemberService {
 
     private String encodeMemberPw(String memberPw){
         return Base64.getEncoder().encodeToString(memberPw.getBytes());
-    }
-
-    private Member findMemberById(String memberId){
-        return memberRepository.findById(memberId)
-                .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
     }
 }
