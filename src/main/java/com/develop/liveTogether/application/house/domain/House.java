@@ -3,6 +3,7 @@ package com.develop.liveTogether.application.house.domain;
 import com.develop.liveTogether.application.house.data.Address;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.member.domain.RoomGuest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,6 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,6 +43,12 @@ public class House {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "memberId")
 	private Member member;
+	@OneToMany(mappedBy = "roomNumber")
+	private List<HouseRoom> houseRooms = new ArrayList<>();
+	@OneToMany(mappedBy = "houseFileNumber")
+	private List<HouseFile> houseFiles = new ArrayList<>();
+	@OneToMany(mappedBy = "roomGuestNumber")
+	private List<RoomGuest> roomGuests = new ArrayList<>();
 
 	@Builder
 	public House(Long houseNumber, int houseMax,
