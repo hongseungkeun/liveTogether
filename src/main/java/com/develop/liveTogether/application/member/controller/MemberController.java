@@ -1,6 +1,7 @@
 package com.develop.liveTogether.application.member.controller;
 
 import com.develop.liveTogether.application.member.dto.request.*;
+import com.develop.liveTogether.application.member.dto.response.FindIdResponse;
 import com.develop.liveTogether.application.member.service.MemberService;
 import com.develop.liveTogether.global.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> joinMember(@Valid @RequestBody JoinRequest request){
+    public ResponseEntity<Void> join(@Valid @RequestBody JoinRequest request){
         memberService.signUp(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -60,21 +61,21 @@ public class MemberController {
     }
 
     @PostMapping("/find/id")
-    public ResponseEntity<String> findId(@Valid @RequestBody FindIdRequest request){
-        String memberId = memberService.findId(request);
+    public ResponseEntity<FindIdResponse> findId(@Valid @RequestBody FindIdRequest request){
+        FindIdResponse findIdResponse = memberService.findId(request);
 
-        return ResponseEntity.ok(memberId);
+        return ResponseEntity.ok(findIdResponse);
     }
 
     @PostMapping("/find/pw")
-    public ResponseEntity<String> findPw(@Valid @RequestBody FindPwRequest request){
+    public ResponseEntity<Void> findPw(@Valid @RequestBody FindPwRequest request){
         memberService.findPw(request);
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/find/changePw")
-    public ResponseEntity<String> findPw(@Valid @RequestBody ChangePwRequest request){
+    public ResponseEntity<Void> findPw(@Valid @RequestBody ChangePwRequest request){
         memberService.changePw(request);
 
         return ResponseEntity.ok().build();

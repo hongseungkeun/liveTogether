@@ -2,6 +2,7 @@ package com.develop.liveTogether.application.member.service;
 
 import com.develop.liveTogether.application.member.domain.Member;
 import com.develop.liveTogether.application.member.dto.request.*;
+import com.develop.liveTogether.application.member.dto.response.FindIdResponse;
 import com.develop.liveTogether.application.member.exception.DuplicatedMemberIdException;
 import com.develop.liveTogether.application.member.exception.DuplicatedNicknameException;
 import com.develop.liveTogether.application.member.exception.LoginFailedException;
@@ -36,11 +37,11 @@ public class MemberService {
         return member.getMemberId();
     }
 
-    public String findId(FindIdRequest request) {
+    public FindIdResponse findId(FindIdRequest request) {
         Member member = memberRepository.findByMemberNameAndMemberPhone(request.memberName(), request.memberPhone())
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
 
-        return member.getMemberId();
+        return FindIdResponse.toDto(member.getMemberId());
     }
 
     public void findPw(FindPwRequest request) {
