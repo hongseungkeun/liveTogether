@@ -13,73 +13,73 @@ import org.hibernate.annotations.DynamicInsert;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
 public class Option {
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opAirCon;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opCentralHeat;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opLocalHeat;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opRefrigerator;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opWasher;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opGasRange;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opInduction;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opMicrowave;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opDesk;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opDoorLock;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opBed;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opCloset;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opShoes;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opSink;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opInterPhone;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opWindow;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opCctv;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opVeranda;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opDelivery;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String opFireAlarm;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String houseParking;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String houseElevator;
-    @Column
+    @Column(columnDefinition = "char", length=1)
     @ColumnDefault("'N'")
     private String housePet;
 
