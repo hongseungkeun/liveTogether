@@ -9,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class HouseRoom {
+public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long roomNumber;
 	@Column(nullable = false)
 	private String roomName;
 	@Column(nullable = false)
-	private String roomPersonType;
+	private String roomMaxPerson;
 	@Column(nullable = false)
 	private String roomGender;
 	@Column(nullable = false)
@@ -32,15 +32,15 @@ public class HouseRoom {
 	private House house;
 
 	@Builder
-	public HouseRoom(Long roomNumber, String roomName,
-					 String roomPersonType, String roomGender,
-					 int roomDeposit, int roomMonthly,
-					 String roomArea, String roomDate,
-					 House house)
+	public Room(Long roomNumber, String roomName,
+				String roomMaxPerson, String roomGender,
+				int roomDeposit, int roomMonthly,
+				String roomArea, String roomDate,
+				House house)
 	{
 		this.roomNumber = roomNumber;
 		this.roomName = roomName;
-		this.roomPersonType = roomPersonType;
+		this.roomMaxPerson = roomMaxPerson;
 		this.roomGender = roomGender;
 		this.roomDeposit = roomDeposit;
 		this.roomMonthly = roomMonthly;

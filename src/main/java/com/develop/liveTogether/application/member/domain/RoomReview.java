@@ -1,7 +1,7 @@
 package com.develop.liveTogether.application.member.domain;
 
 import com.develop.liveTogether.application.house.domain.House;
-import com.develop.liveTogether.application.house.domain.HouseRoom;
+import com.develop.liveTogether.application.house.domain.Room;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class RoomReview {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long roomGuestNumber;
+    private Long roomReviewNumber;
     @Column(nullable = false)
     private int star;
     @Column(nullable = false)
@@ -27,18 +27,18 @@ public class RoomReview {
     private House house;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roomNumber")
-    private HouseRoom houseRoom;
+    private Room room;
 
     @Builder
-    public RoomReview(Long roomGuestNumber, int star,
+    public RoomReview(Long roomReviewNumber, int star,
                       String review, Member member,
-                      House house, HouseRoom houseRoom)
+                      House house, Room room)
     {
-        this.roomGuestNumber = roomGuestNumber;
+        this.roomReviewNumber = roomReviewNumber;
         this.star = star;
         this.review = review;
         this.member = member;
         this.house = house;
-        this.houseRoom = houseRoom;
+        this.room = room;
     }
 }

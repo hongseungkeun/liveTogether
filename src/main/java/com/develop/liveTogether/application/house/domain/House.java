@@ -3,7 +3,7 @@ package com.develop.liveTogether.application.house.domain;
 import com.develop.liveTogether.application.house.data.Address;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.member.domain.Member;
-import com.develop.liveTogether.application.member.domain.RoomGuest;
+import com.develop.liveTogether.application.member.domain.RoomReview;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -44,28 +44,32 @@ public class House {
 	@JoinColumn(name = "memberId")
 	private Member member;
 	@OneToMany(mappedBy = "roomNumber")
-	private List<HouseRoom> houseRooms = new ArrayList<>();
+	private List<Room> rooms = new ArrayList<>();
 	@OneToMany(mappedBy = "houseFileNumber")
 	private List<HouseFile> houseFiles = new ArrayList<>();
-	@OneToMany(mappedBy = "roomGuestNumber")
-	private List<RoomGuest> roomGuests = new ArrayList<>();
+	@OneToMany(mappedBy = "roomReviewNumber")
+	private List<RoomReview> roomReviews = new ArrayList<>();
 
 	@Builder
 	public House(Long houseNumber, int houseMax,
 				 String houseStatus, String houseType,
-				 Address address, String houseGender,
+				 String houseGender, Address address,
 				 Option option, String houseContent,
-				 String houseMessage, Member member)
-	{
+				 String houseMessage, Member member,
+				 List<Room> rooms, List<HouseFile> houseFiles,
+				 List<RoomReview> roomReviews) {
 		this.houseNumber = houseNumber;
 		this.houseMax = houseMax;
 		this.houseStatus = houseStatus;
 		this.houseType = houseType;
-		this.address = address;
 		this.houseGender = houseGender;
+		this.address = address;
 		this.option = option;
 		this.houseContent = houseContent;
 		this.houseMessage = houseMessage;
 		this.member = member;
+		this.rooms = rooms;
+		this.houseFiles = houseFiles;
+		this.roomReviews = roomReviews;
 	}
 }
