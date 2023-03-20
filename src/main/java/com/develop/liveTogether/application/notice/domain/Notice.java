@@ -1,5 +1,6 @@
-package com.develop.liveTogether.application.board.domain;
+package com.develop.liveTogether.application.notice.domain;
 
+import com.develop.liveTogether.application.house.domain.HouseFile;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,6 +11,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,14 +30,19 @@ public class Notice {
 	@Column(nullable = false)
 	private String noticeCreateDate;
 
+	@OneToMany(mappedBy = "noticeFileNumber", cascade = CascadeType.ALL)
+	private List<NoticeFile> noticeFiles = new ArrayList<>();
+
 	@Builder
 	public Notice(Long noticeNumber, String noticeTitle,
-				  String noticeContent, String noticeCreateDate)
+				  String noticeContent, String noticeCreateDate,
+				  List<NoticeFile> noticeFiles)
 	{
 		this.noticeNumber = noticeNumber;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
 		this.noticeCreateDate = noticeCreateDate;
+		this.noticeFiles = noticeFiles;
 	}
 
 	@PrePersist
