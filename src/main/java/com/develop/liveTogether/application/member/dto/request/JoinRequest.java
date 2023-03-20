@@ -1,7 +1,10 @@
 package com.develop.liveTogether.application.member.dto.request;
 
+import com.develop.liveTogether.application.member.data.MemberGender;
+import com.develop.liveTogether.application.member.data.Role;
 import com.develop.liveTogether.application.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 
@@ -12,9 +15,9 @@ public record JoinRequest(
         @NotBlank String memberName,
         @NotBlank String memberNickname,
         @NotBlank String memberPhone,
-        @NotBlank String memberGender,
+        @NotNull MemberGender memberGender,
         @NotBlank String memberProfile,
-        @NotBlank String memberRole) {
+        @NotNull Role memberRole) {
     public Member toMember(String memberPw) {
         return Member.builder()
                 .memberId(this.memberId)

@@ -1,5 +1,7 @@
 package com.develop.liveTogether.application.member.domain;
 
+import com.develop.liveTogether.application.member.data.MemberGender;
+import com.develop.liveTogether.application.member.data.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,11 +24,13 @@ public class Member {
 	@Column(nullable = false)
 	private String memberPhone;
 	@Column(nullable = false)
-	private String memberGender;
-	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private MemberGender memberGender;
+	@Column(nullable = false, length = 1000)
 	private String memberProfile;
 	@Column(nullable = false)
-	private String memberRole;
+	@Enumerated(EnumType.STRING)
+	private Role memberRole;
 
 	public void changePassword(String newPassword){
 		this.memberPw = newPassword;
@@ -35,8 +39,8 @@ public class Member {
 	@Builder
 	public Member(String memberId, String memberPw,
 				  String memberName, String memberNickname,
-				  String memberPhone, String memberGender,
-				  String memberProfile, String memberRole)
+				  String memberPhone, MemberGender memberGender,
+				  String memberProfile, Role memberRole)
 	{
 		this.memberId = memberId;
 		this.memberPw = memberPw;
