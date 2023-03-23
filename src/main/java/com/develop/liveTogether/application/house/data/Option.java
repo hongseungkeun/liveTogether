@@ -3,6 +3,7 @@ package com.develop.liveTogether.application.house.data;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -83,6 +84,7 @@ public class Option {
     @ColumnDefault("'N'")
     private String housePet;
 
+    @Builder
     public Option(String opAirCon, String opCentralHeat,
                   String opLocalHeat, String opRefrigerator,
                   String opWasher, String opGasRange,
