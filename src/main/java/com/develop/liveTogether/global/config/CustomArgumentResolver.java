@@ -1,6 +1,8 @@
 package com.develop.liveTogether.global.config;
 
 import com.develop.liveTogether.global.annotation.LoginId;
+import com.develop.liveTogether.global.exception.AuthFailedException;
+import com.develop.liveTogether.global.exception.error.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.core.MethodParameter;
@@ -21,7 +23,11 @@ public class CustomArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory){
         HttpServletRequest httpServletRequest = (HttpServletRequest) webRequest.getNativeRequest();
-        HttpSession session = httpServletRequest.getSession();
+        HttpSession session = httpServletRequest.getSession(false);
+
+        if(session == null){
+            throw new AuthFailedException(ErrorCode.AUTH_FAILED);
+        }
 
         return session.getAttribute(SESSION_KEY);
     }
