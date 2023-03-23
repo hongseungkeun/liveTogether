@@ -1,7 +1,7 @@
 package com.develop.liveTogether.application.house.domain;
 
 import com.develop.liveTogether.application.house.data.Address;
-import com.develop.liveTogether.application.house.data.HouseGender;
+import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.member.domain.Member;
@@ -28,7 +28,7 @@ public class House {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long houseNumber;
 	@Column(nullable = false)
-	private int houseMax;
+	private int houseFixPeopleNum;
 	@Column(nullable = false, columnDefinition = "char", length=1)
 	@ColumnDefault("'N'")
 	private String houseStatus;
@@ -37,7 +37,7 @@ public class House {
 	private HouseType houseType;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private HouseGender houseGender;
+	private Gender gender;
 	@Embedded
 	private Address address;
 	@Embedded
@@ -58,18 +58,18 @@ public class House {
 	private List<RoomReview> roomReviews = new ArrayList<>();
 
 	@Builder
-	public House(Long houseNumber, int houseMax,
+	public House(Long houseNumber, int houseFixPeopleNum,
 				 String houseStatus, HouseType houseType,
-				 HouseGender houseGender, Address address,
+				 Gender gender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, Member member,
 				 List<Room> rooms, List<HouseFile> houseFiles,
 				 List<RoomReview> roomReviews) {
 		this.houseNumber = houseNumber;
-		this.houseMax = houseMax;
+		this.houseFixPeopleNum = houseFixPeopleNum;
 		this.houseStatus = houseStatus;
 		this.houseType = houseType;
-		this.houseGender = houseGender;
+		this.gender = gender;
 		this.address = address;
 		this.option = option;
 		this.houseContent = houseContent;

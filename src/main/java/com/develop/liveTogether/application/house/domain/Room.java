@@ -1,5 +1,6 @@
 package com.develop.liveTogether.application.house.domain;
 
+import com.develop.liveTogether.application.house.data.Gender;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -16,15 +17,15 @@ public class Room {
 	@Column(nullable = false)
 	private String roomName;
 	@Column(nullable = false)
-	private String roomMaxPerson;
+	private int roomMaxPerson;
 	@Column(nullable = false)
-	private String roomGender;
+	private Gender roomGender;
 	@Column(nullable = false)
 	private int roomDeposit;
 	@Column(nullable = false)
 	private int roomMonthly;
 	@Column(nullable = false)
-	private String roomArea;
+	private int roomArea;
 	@Column(nullable = false)
 	private String roomDate;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -33,9 +34,9 @@ public class Room {
 
 	@Builder
 	public Room(Long roomNumber, String roomName,
-				String roomMaxPerson, String roomGender,
+				int roomMaxPerson, Gender roomGender,
 				int roomDeposit, int roomMonthly,
-				String roomArea, String roomDate,
+				int roomArea, String roomDate,
 				House house)
 	{
 		this.roomNumber = roomNumber;
