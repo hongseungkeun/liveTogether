@@ -3,19 +3,17 @@ package com.develop.liveTogether.application.member.controller;
 import com.develop.liveTogether.application.member.dto.request.*;
 import com.develop.liveTogether.application.member.dto.response.FindIdResponse;
 import com.develop.liveTogether.application.member.service.MemberService;
+import com.develop.liveTogether.global.annotation.LoginId;
 import com.develop.liveTogether.global.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/member")
+@RequestMapping("api/members")
 public class MemberController {
     private final MemberService memberService;
 
@@ -46,38 +44,47 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/valid/id")
+    @PostMapping("/valid-id")
     public ResponseEntity<Void> validateId(@Valid @RequestBody ValidateIdRequest request){
         memberService.isDuplicatedMemberId(request.memberId());
 
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/valid/nickName")
+    @PostMapping("/valid-nickName")
     public ResponseEntity<Void> validateNickname(@Valid @RequestBody ValidateNicknameRequest request){
         memberService.isDuplicatedMemberNickname(request.memberNickname());
 
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/find/id")
+    @PostMapping("/find-id")
     public ResponseEntity<FindIdResponse> findId(@Valid @RequestBody FindIdRequest request){
         FindIdResponse findIdResponse = memberService.findId(request);
 
         return ResponseEntity.ok(findIdResponse);
     }
 
-    @PostMapping("/find/pw")
+    @PostMapping("/find-pw")
     public ResponseEntity<Void> findPw(@Valid @RequestBody FindPwRequest request){
         memberService.findPw(request);
 
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/find/changePw")
+    @PostMapping("/find-changePw")
     public ResponseEntity<Void> findPw(@Valid @RequestBody ChangePwRequest request){
         memberService.changePw(request);
 
         return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("withdrawal")
+    public ResponseEntity<Void> withdrawal(@LoginId String memberId, HttpSession session){
+        memberService.withdrawal(memberId);
+
+        SessionUtil.removeSession(session);
+
+        return ResponseEntity.noContent().build();
     }
 }

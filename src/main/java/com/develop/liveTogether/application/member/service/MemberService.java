@@ -29,11 +29,13 @@ public class MemberService {
 
         Member member = request.toMember(encodeMemberPw(request.memberPw()));
 
+//        af.setPath(req.getContextPath() + "/member/login.jsp");
         memberRepository.save(member);
     }
 
     public String login(LoginRequest request){
         Member member = isPossibleLogin(request.memberId(), encodeMemberPw(request.memberPw()));
+
         return member.getMemberId();
     }
 
@@ -52,6 +54,10 @@ public class MemberService {
     public void changePw(ChangePwRequest request) {
         Member member = findMemberById(request.memberId());
         member.changePassword(encodeMemberPw(request.memberPw()));
+    }
+
+    public void withdrawal(String memberId) {
+        memberRepository.deleteById(memberId);
     }
 
     public void isDuplicatedMemberId(String memberId) {
