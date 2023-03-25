@@ -2,17 +2,25 @@ server:
   port: 8081
 
 spring:
+  servlet:
+    multipart:
+      location: C:/hsk/liveTogether/upload/
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
   profiles:
     active: liveTogether
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/House?characterEncoding=utf8
+      url: jdbc:mysql://localhost:3306/liveTogether?characterEncoding=utf8
       username: root
       password: 1234
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+
