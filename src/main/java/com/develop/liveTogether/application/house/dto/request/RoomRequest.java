@@ -3,15 +3,17 @@ package com.develop.liveTogether.application.house.dto.request;
 import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.domain.Room;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record RoomRequest(
-        String roomName,
-        int roomMaxPerson,
+        @NotBlank String roomName,
+        @NotNull int roomMaxPerson,
         Gender roomGender,
-        int roomDeposit,
-        int roomMonthly,
-        int roomArea,
-        String roomDate
+        @NotNull int roomDeposit,
+        @NotNull int roomMonthly,
+        @NotNull int roomArea,
+        @NotBlank String roomDate
 ) {
     public Room toEntity(House house){
         return Room.builder()

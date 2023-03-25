@@ -5,6 +5,8 @@ import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.house.domain.House;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 
@@ -14,11 +16,11 @@ import java.util.stream.Collectors;
 @Builder(access = AccessLevel.PRIVATE)
 public record HouseRegisterRequest(
         HouseType houseType,
-        String houseAddress,
-        String houseAddressDetail,
-        double latitude,
-        double longitude,
-        String houseLocation,
+        @NotBlank String houseAddress,
+        @NotBlank String houseAddressDetail,
+        @NotNull double latitude,
+        @NotNull double longitude,
+        @NotBlank String houseLocation,
         String opAirCon,
         String opCentralHeat,
         String opLocalHeat,
@@ -42,9 +44,9 @@ public record HouseRegisterRequest(
         String houseParking,
         String houseElevator,
         String housePet,
-        String houseContent,
-        String houseMessage,
-        List<RoomRequest> rooms
+        @NotBlank String houseContent,
+        @NotBlank String houseMessage,
+        @NotNull List<RoomRequest> rooms
 ) {
     public House toEntity() {
         return House.builder()

@@ -1,5 +1,6 @@
 package com.develop.liveTogether.application.house.dto.response;
 
+import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.domain.Room;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,11 +8,11 @@ import lombok.Builder;
 @Builder(access = AccessLevel.PRIVATE)
 public record RoomResponse(
         String roomName,
-        String roomMaxPerson,
-        String roomGender,
+        int roomMaxPerson,
+        Gender roomGender,
         int roomDeposit,
         int roomMonthly,
-        String roomArea,
+        int roomArea,
         String roomDate) {
 
     public static RoomResponse toDto(Room room){
