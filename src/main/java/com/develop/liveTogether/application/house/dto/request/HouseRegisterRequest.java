@@ -5,13 +5,13 @@ import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.house.domain.House;
+import com.develop.liveTogether.application.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Builder(access = AccessLevel.PRIVATE)
 public record HouseRegisterRequest(
@@ -48,7 +48,7 @@ public record HouseRegisterRequest(
         @NotBlank String houseMessage,
         @NotNull List<RoomRequest> rooms
 ) {
-    public House toEntity() {
+    public House toEntity(Member member) {
         return House.builder()
                 .houseFixPeopleNum(findHouseFixPeopleNum())
                 .houseType(this.houseType)
@@ -86,6 +86,7 @@ public record HouseRegisterRequest(
                         .build())
                 .houseContent(this.houseContent)
                 .houseMessage(this.houseMessage)
+                .member(member)
                 .build();
     }
 
@@ -99,7 +100,7 @@ public record HouseRegisterRequest(
         int distinctHouseGenderSize = rooms.stream()
                 .map(room -> room.roomGender())
                 .distinct()
-                .collect(Collectors.toList())
+                .toList()
                 .size();
 
         return distinctHouseGenderSize == 1 ?

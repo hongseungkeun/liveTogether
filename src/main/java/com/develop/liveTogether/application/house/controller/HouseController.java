@@ -32,7 +32,7 @@ public class HouseController {
     @PostMapping
     public ResponseEntity<Void> registerHouse(@LoginId String memberId, @Valid @RequestPart HouseRegisterRequest request,
                                         @RequestPart List<MultipartFile> files){
-        Long houseNumber = houseService.registerHouse(request, files);
+        Long houseNumber = houseService.registerHouse(memberId, request, files);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

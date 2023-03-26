@@ -40,10 +40,13 @@ public class HouseFileService {
 
             String file = FILE_PATH + File.separator + houseFileName;
 
-            Path savePath = Paths.get(file).toAbsolutePath();
+//            File file1 = new File(file);
+
+            Path path = Paths.get(file).toAbsolutePath();
 
             try {
-                multipartFile.transferTo(savePath);
+//                multipartFile.transferTo(file1);
+                multipartFile.transferTo(path);
             } catch (IOException e) {
                 e.printStackTrace();
             }

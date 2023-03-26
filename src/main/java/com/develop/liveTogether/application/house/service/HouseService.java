@@ -5,6 +5,8 @@ import com.develop.liveTogether.application.house.dto.request.HouseRegisterReque
 import com.develop.liveTogether.application.house.dto.response.HouseDetailResponse;
 import com.develop.liveTogether.application.house.exception.HouseNotFoundException;
 import com.develop.liveTogether.application.house.repository.HouseRepository;
+import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.member.service.MemberService;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +17,14 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class HouseService {
+    private final MemberService memberService;
     private final HouseFileService houseFileService;
     private final RoomService roomService;
     private final HouseRepository houseRepository;
 
-    public HouseService(HouseFileService houseFileService,
+    public HouseService(MemberService memberService, HouseFileService houseFileService,
                         RoomService roomService, HouseRepository houseRepository) {
+        this.memberService = memberService;
         this.houseFileService = houseFileService;
         this.roomService = roomService;
         this.houseRepository = houseRepository;
@@ -33,8 +37,10 @@ public class HouseService {
     }
 
     @Transactional
-    public Long registerHouse(HouseRegisterRequest request, List<MultipartFile> files){
-        House house = houseRepository.save(request.toEntity());
+    public Long registerHouse(String memberId, HouseRegisterRequest request, List<MultipartFile> files){
+        Member member = memberService.findMemberById(memberId);
+
+        House house = houseRepository.save(request.toEntity(member));
 
         houseFileService.saveFile(files, house);
         roomService.saveRoom(request.rooms(), house);
