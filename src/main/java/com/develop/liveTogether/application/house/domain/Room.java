@@ -19,6 +19,7 @@ public class Room {
 	@Column(nullable = false)
 	private int roomMaxPerson;
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Gender roomGender;
 	@Column(nullable = false)
 	private int roomDeposit;
