@@ -32,7 +32,7 @@ public class House {
 	@Column(nullable = false, columnDefinition = "char", length=1)
 	@ColumnDefault("'N'")
 	private String houseStatus;
-	@Column(nullable = false, columnDefinition = "char", length=1)
+	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private HouseType houseType;
 	@Column(nullable = false)
