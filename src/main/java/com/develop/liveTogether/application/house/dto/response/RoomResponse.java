@@ -1,6 +1,5 @@
 package com.develop.liveTogether.application.house.dto.response;
 
-import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.domain.Room;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,7 +8,7 @@ import lombok.Builder;
 public record RoomResponse(
         String roomName,
         int roomMaxPerson,
-        Gender roomGender,
+        String roomGender,
         int roomDeposit,
         int roomMonthly,
         int roomArea,
@@ -19,7 +18,7 @@ public record RoomResponse(
         return RoomResponse.builder()
                 .roomName(room.getRoomName())
                 .roomMaxPerson(room.getRoomMaxPerson())
-                .roomGender(room.getRoomGender())
+                .roomGender(room.getRoomGender().getGender())
                 .roomDeposit(room.getRoomDeposit())
                 .roomMonthly(room.getRoomMonthly())
                 .roomArea(room.getRoomArea())

@@ -52,6 +52,7 @@ public record HouseDetailResponse(
         return HouseDetailResponse.builder()
                 .houseNumber(house.getHouseNumber())
                 .houseMax(house.getHouseFixPeopleNum())
+                .houseStatus(house.getHouseStatus())
                 .houseType(house.getHouseType().getType())
                 .houseAddress(house.getAddress().getHouseAddress())
                 .houseAddressDetail(house.getAddress().getHouseAddressDetail())
