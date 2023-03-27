@@ -30,7 +30,7 @@ public class Notice {
 	@Column(nullable = false)
 	private String noticeCreateDate;
 
-	@OneToMany(mappedBy = "noticeFileNumber", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "notice", cascade = CascadeType.ALL)
 	private List<NoticeFile> noticeFiles = new ArrayList<>();
 
 	@Builder

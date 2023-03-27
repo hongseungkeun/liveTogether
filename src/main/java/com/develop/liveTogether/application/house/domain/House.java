@@ -50,11 +50,11 @@ public class House {
 	@JoinColumn(name = "memberId")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
-	@OneToMany(mappedBy = "roomNumber", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<Room> rooms = new ArrayList<>();
-	@OneToMany(mappedBy = "houseFileNumber", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<HouseFile> houseFiles = new ArrayList<>();
-	@OneToMany(mappedBy = "roomReviewNumber", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<RoomReview> roomReviews = new ArrayList<>();
 
 	@Builder
