@@ -38,14 +38,9 @@ public class HouseFileService {
             String houseFileNameOriginal = multipartFile.getOriginalFilename();
             String houseFileName = UUID.randomUUID() + "." + extractExt(houseFileNameOriginal);
 
-            String file = FILE_PATH + File.separator + houseFileName;
-
-//            File file1 = new File(file);
-
-            Path path = Paths.get(file).toAbsolutePath();
+            Path path = Paths.get(getFilePath(houseFileName)).toAbsolutePath();
 
             try {
-//                multipartFile.transferTo(file1);
                 multipartFile.transferTo(path);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -61,7 +56,7 @@ public class HouseFileService {
         }
     }
 
-    private String getFilePath(String filename) { return FILE_PATH + filename; }
+    private String getFilePath(String houseFileName) { return FILE_PATH + File.separator + houseFileName; }
 
     private String extractExt(String houseFileNameOriginal) {
         int pos = houseFileNameOriginal.lastIndexOf(".");
