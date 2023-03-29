@@ -29,9 +29,9 @@ public class House {
 	private Long houseNumber;
 	@Column(nullable = false)
 	private int houseFixPeopleNum;
-	@Column(nullable = false, columnDefinition = "char", length=1)
-	@ColumnDefault("'N'")
-	private String houseStatus;
+	@Column(nullable = false)
+	@ColumnDefault("0")
+	private Boolean houseStatus;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private HouseType houseType;
@@ -59,7 +59,7 @@ public class House {
 
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
-				 String houseStatus, HouseType houseType,
+				 Boolean houseStatus, HouseType houseType,
 				 Gender gender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, Member member,
