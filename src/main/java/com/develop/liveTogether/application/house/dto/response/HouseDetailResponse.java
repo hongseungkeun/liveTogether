@@ -59,7 +59,7 @@ public record HouseDetailResponse(
                 .latitude(house.getAddress().getLatitude())
                 .longitude(house.getAddress().getLongitude())
                 .houseLocation(house.getAddress().getHouseLocation())
-                .houseGender(house.getGender().getGender())
+                .houseGender(house.getHouseGender().getGender())
                 .opAirCon(house.getOption().getOpAirCon())
                 .opCentralHeat(house.getOption().getOpCentralHeat())
                 .opLocalHeat(house.getOption().getOpLocalHeat())

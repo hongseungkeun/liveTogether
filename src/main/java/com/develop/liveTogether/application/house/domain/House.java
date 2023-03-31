@@ -37,7 +37,7 @@ public class House {
 	private HouseType houseType;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Gender gender;
+	private Gender HouseGender;
 	@Embedded
 	private Address address;
 	@Embedded
@@ -60,7 +60,7 @@ public class House {
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
 				 Boolean houseStatus, HouseType houseType,
-				 Gender gender, Address address,
+				 Gender HouseGender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, Member member,
 				 List<Room> rooms, List<HouseFile> houseFiles,
@@ -69,7 +69,7 @@ public class House {
 		this.houseFixPeopleNum = houseFixPeopleNum;
 		this.houseStatus = houseStatus;
 		this.houseType = houseType;
-		this.gender = gender;
+		this.HouseGender = HouseGender;
 		this.address = address;
 		this.option = option;
 		this.houseContent = houseContent;
