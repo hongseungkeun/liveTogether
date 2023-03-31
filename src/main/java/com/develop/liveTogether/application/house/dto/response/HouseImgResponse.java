@@ -6,7 +6,8 @@ import lombok.Builder;
 
 @Builder(access = AccessLevel.PRIVATE)
 public record HouseImgResponse(
-        String houseFileName) {
+        String houseFileName
+) {
 
     public static HouseImgResponse toDto(HouseFile houseFile){
         return HouseImgResponse.builder()

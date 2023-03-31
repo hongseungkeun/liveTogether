@@ -5,7 +5,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 
 @Builder(access = AccessLevel.PRIVATE)
-public record HouseFileResponse(String houseFileName) {
+public record HouseFileResponse(
+        String houseFileName
+) {
     
     public static HouseFileResponse toDto(HouseFile houseFile){
         return HouseFileResponse.builder()
