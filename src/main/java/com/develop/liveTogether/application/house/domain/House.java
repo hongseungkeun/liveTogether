@@ -5,6 +5,7 @@ import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.member.domain.RoomGuest;
 import com.develop.liveTogether.application.member.domain.RoomReview;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -37,7 +38,7 @@ public class House {
 	private HouseType houseType;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Gender HouseGender;
+	private Gender houseGender;
 	@Embedded
 	private Address address;
 	@Embedded
@@ -56,20 +57,22 @@ public class House {
 	private List<HouseFile> houseFiles = new ArrayList<>();
 	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<RoomReview> roomReviews = new ArrayList<>();
+	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
+	private List<RoomGuest> roomGuests = new ArrayList<>();
 
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
 				 Boolean houseStatus, HouseType houseType,
-				 Gender HouseGender, Address address,
+				 Gender houseGender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, Member member,
 				 List<Room> rooms, List<HouseFile> houseFiles,
-				 List<RoomReview> roomReviews) {
+				 List<RoomReview> roomReviews, List<RoomGuest> roomGuests) {
 		this.houseNumber = houseNumber;
 		this.houseFixPeopleNum = houseFixPeopleNum;
 		this.houseStatus = houseStatus;
 		this.houseType = houseType;
-		this.HouseGender = HouseGender;
+		this.houseGender = houseGender;
 		this.address = address;
 		this.option = option;
 		this.houseContent = houseContent;
@@ -78,5 +81,6 @@ public class House {
 		this.rooms = rooms;
 		this.houseFiles = houseFiles;
 		this.roomReviews = roomReviews;
+		this.roomGuests = roomGuests;
 	}
 }

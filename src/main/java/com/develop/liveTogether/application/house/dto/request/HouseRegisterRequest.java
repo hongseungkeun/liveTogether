@@ -58,7 +58,7 @@ public record HouseRegisterRequest(
                         .houseLocation(this.houseLocation)
                         .latitude(this.latitude)
                         .longitude(this.longitude).build())
-                .gender(matchHouseGender())
+                .houseGender(matchHouseGender())
                 .option(Option.builder()
                         .opAirCon(this.opAirCon)
                         .opCentralHeat(this.opCentralHeat)
