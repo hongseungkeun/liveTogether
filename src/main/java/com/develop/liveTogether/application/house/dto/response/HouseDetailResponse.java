@@ -48,6 +48,9 @@ public record HouseDetailResponse(
         String houseStructuralImg,
         List<HouseImgResponse> houseImg) {
 
+    private static int FIRST_HOUSE_FILE = 0;
+    private static int EXIST_FIRST_HOUSE_FILE = 1;
+
     public static HouseDetailResponse toDto(House house) {
         return HouseDetailResponse.builder()
                 .houseNumber(house.getHouseNumber())
@@ -94,11 +97,11 @@ public record HouseDetailResponse(
                         .map(RoomReviewResponse::toDto)
                         .toList())
                 .houseStructuralImg(house.getHouseFiles()
-                        .get(0)
+                        .get(FIRST_HOUSE_FILE)
                         .getHouseFileName())
                 .houseImg(house.getHouseFiles()
                         .stream()
-                        .skip(1)
+                        .skip(EXIST_FIRST_HOUSE_FILE)
                         .map(HouseImgResponse::toDto)
                 .toList())
                 .build();
