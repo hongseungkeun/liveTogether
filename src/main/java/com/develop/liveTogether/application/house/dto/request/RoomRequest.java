@@ -15,7 +15,7 @@ public record RoomRequest(
         @NotNull int roomArea,
         @NotBlank String roomDate
 ) {
-    public Room toEntity(House house){
+    public Room toEntity(House house, String roomImg){
         return Room.builder()
                 .roomName(this.roomName)
                 .roomMaxPerson(this.roomMaxPerson)
@@ -24,6 +24,7 @@ public record RoomRequest(
                 .roomMonthly(this.roomMonthly)
                 .roomArea(this.roomArea)
                 .roomDate(this.roomDate)
+                .roomImg(roomImg)
                 .house(house)
                 .build();
     }

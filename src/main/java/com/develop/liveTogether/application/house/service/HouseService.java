@@ -3,29 +3,36 @@ package com.develop.liveTogether.application.house.service;
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
 import com.develop.liveTogether.application.house.dto.response.HouseDetailResponse;
+import com.develop.liveTogether.application.house.dto.response.HouseListResponse;
+import com.develop.liveTogether.application.house.exception.FileNotExistException;
 import com.develop.liveTogether.application.house.exception.HouseNotFoundException;
 import com.develop.liveTogether.application.house.repository.HouseRepository;
 import com.develop.liveTogether.application.member.domain.Member;
 import com.develop.liveTogether.application.member.service.MemberService;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
+import com.develop.liveTogether.global.util.FileUtil;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
 public class HouseService {
     private final MemberService memberService;
-    private final HouseFileService houseFileService;
     private final RoomService roomService;
     private final HouseRepository houseRepository;
 
-    public HouseService(MemberService memberService, HouseFileService houseFileService,
-                        RoomService roomService, HouseRepository houseRepository) {
+    public HouseService(MemberService memberService, RoomService roomService,
+                        HouseRepository houseRepository) {
         this.memberService = memberService;
-        this.houseFileService = houseFileService;
         this.roomService = roomService;
         this.houseRepository = houseRepository;
     }
@@ -36,14 +43,26 @@ public class HouseService {
         return HouseDetailResponse.toDto(house);
     }
 
+    public List<HouseListResponse> getHouseList(Pageable pageable) {
+        Slice<House> houses = houseRepository.findAll(pageable);
+
+        return houses.stream()
+                .map(HouseListResponse::toDto)
+                .toList();
+    }
+
     @Transactional
-    public Long registerHouse(String memberId, HouseRegisterRequest request, List<MultipartFile> files){
+    public Long registerHouse(String memberId, HouseRegisterRequest request,
+                              MultipartFile thumbnail, MultipartFile floorPlan,
+                              List<MultipartFile> roomFiles){
         Member member = memberService.findMemberById(memberId);
 
-        House house = houseRepository.save(request.toEntity(member));
+        String houseThumbnail = saveFile(thumbnail);
+        String houseFloorPlan = saveFile(floorPlan);
 
-        houseFileService.saveFile(files, house);
-        roomService.saveRoom(request.rooms(), house);
+        House house = houseRepository.save(request.toEntity(member, houseThumbnail, houseFloorPlan));
+
+        roomService.saveRoom(request.rooms(), house, roomFiles);
 
         return house.getHouseNumber();
     }
@@ -51,5 +70,23 @@ public class HouseService {
     private House findHouseById(Long houseNumber){
         return houseRepository.findById(houseNumber)
                 .orElseThrow(() -> new HouseNotFoundException(ErrorCode.HOUSE_NOT_FOUND));
+    }
+
+    private String saveFile(MultipartFile file) {
+        if(file.isEmpty()) {
+            throw new FileNotExistException(ErrorCode.FILE_NOT_EXIST);
+        }
+        String houseFileNameOriginal = file.getOriginalFilename();
+        String houseFileName = UUID.randomUUID() + "." + FileUtil.extractExt(houseFileNameOriginal);
+
+        Path path = Paths.get(FileUtil.getFilePath(houseFileName)).toAbsolutePath();
+
+        try {
+            file.transferTo(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return houseFileName;
     }
 }
