@@ -29,6 +29,8 @@ public class Room {
 	private int roomArea;
 	@Column(nullable = false)
 	private String roomDate;
+	@Column(nullable = false)
+	private String roomImg;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "houseNumber")
 	private House house;
@@ -38,7 +40,7 @@ public class Room {
 				int roomMaxPerson, Gender roomGender,
 				int roomDeposit, int roomMonthly,
 				int roomArea, String roomDate,
-				House house)
+				String roomImg, House house)
 	{
 		this.roomNumber = roomNumber;
 		this.roomName = roomName;
@@ -48,6 +50,7 @@ public class Room {
 		this.roomMonthly = roomMonthly;
 		this.roomArea = roomArea;
 		this.roomDate = roomDate;
+		this.roomImg = roomImg;
 		this.house = house;
 	}
 }
