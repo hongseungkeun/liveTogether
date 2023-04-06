@@ -1,6 +1,5 @@
 package com.develop.liveTogether.application.notice.domain;
 
-import com.develop.liveTogether.application.house.domain.HouseFile;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
