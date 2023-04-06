@@ -47,14 +47,16 @@ public class House {
 	private String houseContent;
 	@Column(nullable = false, length = 3000)
 	private String houseMessage;
+	@Column(nullable = false)
+	private String houseThumbnail;
+	@Column(nullable = false)
+	private String houseFloorPlan;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "memberId")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Member member;
 	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<Room> rooms = new ArrayList<>();
-	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
-	private List<HouseFile> houseFiles = new ArrayList<>();
 	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
 	private List<RoomReview> roomReviews = new ArrayList<>();
 	@OneToMany(mappedBy = "house", cascade = CascadeType.ALL)
@@ -65,9 +67,10 @@ public class House {
 				 Boolean houseStatus, HouseType houseType,
 				 Gender houseGender, Address address,
 				 Option option, String houseContent,
-				 String houseMessage, Member member,
-				 List<Room> rooms, List<HouseFile> houseFiles,
-				 List<RoomReview> roomReviews, List<RoomGuest> roomGuests) {
+				 String houseMessage, String houseThumbnail,
+				 String houseFloorPlan, Member member,
+				 List<Room> rooms, List<RoomReview> roomReviews,
+				 List<RoomGuest> roomGuests) {
 		this.houseNumber = houseNumber;
 		this.houseFixPeopleNum = houseFixPeopleNum;
 		this.houseStatus = houseStatus;
@@ -77,9 +80,10 @@ public class House {
 		this.option = option;
 		this.houseContent = houseContent;
 		this.houseMessage = houseMessage;
+		this.houseThumbnail = houseThumbnail;
+		this.houseFloorPlan = houseFloorPlan;
 		this.member = member;
 		this.rooms = rooms;
-		this.houseFiles = houseFiles;
 		this.roomReviews = roomReviews;
 		this.roomGuests = roomGuests;
 	}

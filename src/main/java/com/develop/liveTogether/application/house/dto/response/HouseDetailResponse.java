@@ -43,14 +43,11 @@ public record HouseDetailResponse(
         Boolean housePet,
         String houseContent,
         String houseMessage,
+        String houseThumbnail,
+        String houseFloorPlan,
         List<RoomResponse> rooms,
-        List<RoomReviewResponse> roomReviews,
-        String houseStructuralImg,
-        List<HouseImgResponse> houseImg) {
-
-    private static int FIRST_HOUSE_FILE = 0;
-    private static int EXIST_FIRST_HOUSE_FILE = 1;
-
+        List<RoomReviewResponse> roomReviews
+) {
     public static HouseDetailResponse toDto(House house) {
         return HouseDetailResponse.builder()
                 .houseNumber(house.getHouseNumber())
@@ -88,6 +85,8 @@ public record HouseDetailResponse(
                 .housePet(house.getOption().getHousePet())
                 .houseContent(house.getHouseContent())
                 .houseMessage(house.getHouseMessage())
+                .houseThumbnail(house.getHouseThumbnail())
+                .houseFloorPlan(house.getHouseFloorPlan())
                 .rooms(house.getRooms()
                         .stream()
                         .map(RoomResponse::toDto)
@@ -96,14 +95,6 @@ public record HouseDetailResponse(
                         .stream()
                         .map(RoomReviewResponse::toDto)
                         .toList())
-                .houseStructuralImg(house.getHouseFiles()
-                        .get(FIRST_HOUSE_FILE)
-                        .getHouseFileName())
-                .houseImg(house.getHouseFiles()
-                        .stream()
-                        .skip(EXIST_FIRST_HOUSE_FILE)
-                        .map(HouseImgResponse::toDto)
-                .toList())
                 .build();
     }
 }

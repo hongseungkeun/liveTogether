@@ -10,7 +10,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
-
 import java.util.List;
 
 @Builder(access = AccessLevel.PRIVATE)
@@ -48,7 +47,7 @@ public record HouseRegisterRequest(
         @NotBlank String houseMessage,
         @NotNull List<RoomRequest> rooms
 ) {
-    public House toEntity(Member member) {
+    public House toEntity(Member member, String houseThumbnail, String houseFloorPlan) {
         return House.builder()
                 .houseFixPeopleNum(findHouseFixPeopleNum())
                 .houseType(this.houseType)
@@ -86,19 +85,21 @@ public record HouseRegisterRequest(
                         .build())
                 .houseContent(this.houseContent)
                 .houseMessage(this.houseMessage)
+                .houseThumbnail(houseThumbnail)
+                .houseFloorPlan(houseFloorPlan)
                 .member(member)
                 .build();
     }
 
     private int findHouseFixPeopleNum() {
         return rooms.stream()
-                .mapToInt(room -> room.roomMaxPerson())
+                .mapToInt(RoomRequest::roomMaxPerson)
                 .sum();
     }
 
     private Gender matchHouseGender() {
         int distinctHouseGenderSize = rooms.stream()
-                .map(room -> room.roomGender())
+                .map(RoomRequest::roomGender)
                 .distinct()
                 .toList()
                 .size();
