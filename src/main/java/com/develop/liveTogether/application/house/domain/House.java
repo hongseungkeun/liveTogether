@@ -4,6 +4,7 @@ import com.develop.liveTogether.application.house.data.Address;
 import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
+import com.develop.liveTogether.application.house.dto.HouseUpdate;
 import com.develop.liveTogether.application.member.domain.Member;
 import com.develop.liveTogether.application.member.domain.RoomGuest;
 import com.develop.liveTogether.application.member.domain.RoomReview;
@@ -32,7 +33,7 @@ public class House {
 	private int houseFixPeopleNum;
 	@Column(nullable = false)
 	@ColumnDefault("0")
-	private Boolean houseStatus;
+	private Boolean approval;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private HouseType houseType;
@@ -64,7 +65,7 @@ public class House {
 
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
-				 Boolean houseStatus, HouseType houseType,
+				 Boolean approval, HouseType houseType,
 				 Gender houseGender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, String houseThumbnail,
@@ -73,7 +74,7 @@ public class House {
 				 List<RoomGuest> roomGuests) {
 		this.houseNumber = houseNumber;
 		this.houseFixPeopleNum = houseFixPeopleNum;
-		this.houseStatus = houseStatus;
+		this.approval = approval;
 		this.houseType = houseType;
 		this.houseGender = houseGender;
 		this.address = address;
@@ -86,5 +87,17 @@ public class House {
 		this.rooms = rooms;
 		this.roomReviews = roomReviews;
 		this.roomGuests = roomGuests;
+	}
+
+	public void updateMyHouse(HouseUpdate houseUpdate){
+		this.houseFixPeopleNum = houseUpdate.houseFixPeopleNum();
+		this.houseGender = houseUpdate.houseGender();
+		this.houseType = houseUpdate.houseType();
+		this.address = houseUpdate.address();
+		this.option = houseUpdate.option();
+		this.houseContent = houseUpdate.houseContent();
+		this.houseMessage = houseUpdate.houseMessage();
+		this.houseThumbnail = houseUpdate.houseThumbnail();
+		this.houseFloorPlan = houseUpdate.houseFloorPlan();
 	}
 }
