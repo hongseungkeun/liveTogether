@@ -58,8 +58,8 @@ public class HouseService {
 
     @Transactional
     public HouseResponse registerHouse(String memberId, HouseRegisterRequest request,
-                MultipartFile thumbnail, MultipartFile floorPlan,
-                List<MultipartFile> roomFiles){
+                                       MultipartFile thumbnail, MultipartFile floorPlan,
+                                       List<MultipartFile> roomFiles){
         Member member = memberService.findMemberById(memberId);
 
         House house = houseRepository.save(request.toEntity(member, saveFile(thumbnail), saveFile(floorPlan)));
@@ -71,8 +71,8 @@ public class HouseService {
 
     @Transactional
     public HouseResponse updateHouse(Long houseNumber, HouseUpdateRequest request,
-                            MultipartFile thumbnail, MultipartFile floorPlan,
-                            List<MultipartFile> roomFiles) {
+                                     MultipartFile thumbnail, MultipartFile floorPlan,
+                                     List<MultipartFile> roomFiles) {
         House house = findHouseById(houseNumber);
 
         deleteFile(house.getHouseThumbnail());
