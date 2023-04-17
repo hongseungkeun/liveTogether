@@ -2,7 +2,7 @@ package com.develop.liveTogether.application.house.service;
 
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.domain.Room;
-import com.develop.liveTogether.application.house.dto.request.RoomRequest;
+import com.develop.liveTogether.application.house.dto.RoomRequest;
 import com.develop.liveTogether.application.house.exception.FileNotExistException;
 import com.develop.liveTogether.application.house.repository.RoomRepository;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -37,6 +38,18 @@ public class RoomService {
         }
     }
 
+    @Transactional
+    public void deleteRooms(Long houseNumber) {
+        List<Room> rooms = findRooms(houseNumber);
+        deleteFile(rooms);
+
+        roomRepository.deleteAllByHouse_HouseNumber(houseNumber);
+    }
+
+    private List<Room> findRooms(Long houseNumber){
+        return roomRepository.findAllByHouse_HouseNumber(houseNumber);
+    }
+
     private List<String> saveFile(List<MultipartFile> files){
         List<String> roomFiles = new ArrayList<>();
         for (MultipartFile file : files) {
@@ -61,5 +74,19 @@ public class RoomService {
         }
 
         return houseFileName;
+    }
+
+    private void deleteFile(List<Room> rooms) {
+        for (Room room : rooms) {
+            deleteFile(room);
+        }
+    }
+
+    private void deleteFile(Room room) {
+        File file = new File(FileUtil.getFilePath(room.getRoomImg()));
+
+        if(file.exists()){
+            file.delete();
+        }
     }
 }

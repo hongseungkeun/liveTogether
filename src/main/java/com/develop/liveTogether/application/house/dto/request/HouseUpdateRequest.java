@@ -4,16 +4,13 @@ import com.develop.liveTogether.application.house.data.Address;
 import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
-import com.develop.liveTogether.application.house.domain.House;
-import com.develop.liveTogether.application.member.domain.Member;
+import com.develop.liveTogether.application.house.dto.HouseUpdate;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Builder;
+
 import java.util.List;
 
-@Builder(access = AccessLevel.PRIVATE)
-public record HouseRegisterRequest(
+public record HouseUpdateRequest(
         @NotNull HouseType houseType,
         @NotBlank String houseAddress,
         @NotBlank String houseAddressDetail,
@@ -45,19 +42,19 @@ public record HouseRegisterRequest(
         Boolean housePet,
         @NotBlank String houseContent,
         @NotBlank String houseMessage,
-        @NotNull List<RoomRegisterRequest> rooms
+        @NotNull List<RoomUpdateRequest> rooms
 ) {
-    public House toEntity(Member member, String houseThumbnail, String houseFloorPlan) {
-        return House.builder()
-                .houseFixPeopleNum(getHouseFixPeopleNum())
+    public HouseUpdate toUpdate(String houseThumbnail, String houseFloorPlan) {
+        return HouseUpdate.builder()
                 .houseType(this.houseType)
+                .houseGender(matchHouseGender())
+                .houseFixPeopleNum(getHouseFixPeopleNum())
                 .address(Address.builder()
                         .houseAddress(this.houseAddress)
                         .houseAddressDetail(this.houseAddressDetail)
                         .houseLocation(this.houseLocation)
                         .latitude(this.latitude)
                         .longitude(this.longitude).build())
-                .houseGender(matchHouseGender())
                 .option(Option.builder()
                         .opAirCon(this.opAirCon)
                         .opCentralHeat(this.opCentralHeat)
@@ -87,21 +84,20 @@ public record HouseRegisterRequest(
                 .houseMessage(this.houseMessage)
                 .houseThumbnail(houseThumbnail)
                 .houseFloorPlan(houseFloorPlan)
-                .member(member)
                 .build();
     }
 
     private int getHouseFixPeopleNum() {
         return this.rooms
                 .stream()
-                .mapToInt(RoomRegisterRequest::roomMaxPerson)
+                .mapToInt(RoomUpdateRequest::roomMaxPerson)
                 .sum();
     }
 
     private Gender matchHouseGender() {
         int distinctHouseGenderSize = this.rooms
                 .stream()
-                .map(RoomRegisterRequest::roomGender)
+                .map(RoomUpdateRequest::roomGender)
                 .distinct()
                 .toList()
                 .size();

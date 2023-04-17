@@ -1,20 +1,22 @@
-package com.develop.liveTogether.application.house.dto.request;
+package com.develop.liveTogether.application.house.dto;
 
 import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.domain.Room;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
+import lombok.Builder;
 
+@Builder(access = AccessLevel.PUBLIC)
 public record RoomRequest(
-        @NotBlank String roomName,
-        @NotNull int roomMaxPerson,
+        String roomName,
+        int roomMaxPerson,
         Gender roomGender,
-        @NotNull int roomDeposit,
-        @NotNull int roomMonthly,
-        @NotNull int roomArea,
-        @NotBlank String roomDate
+        int roomDeposit,
+        int roomMonthly,
+        int roomArea,
+        String roomDate
 ) {
+
     public Room toEntity(House house, String roomImg){
         return Room.builder()
                 .roomName(this.roomName)
@@ -28,5 +30,4 @@ public record RoomRequest(
                 .house(house)
                 .build();
     }
-
 }

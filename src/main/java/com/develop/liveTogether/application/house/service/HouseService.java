@@ -1,7 +1,11 @@
 package com.develop.liveTogether.application.house.service;
 
 import com.develop.liveTogether.application.house.domain.House;
+import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
+import com.develop.liveTogether.application.house.dto.request.HouseUpdateRequest;
+import com.develop.liveTogether.application.house.dto.request.RoomRegisterRequest;
+import com.develop.liveTogether.application.house.dto.request.RoomUpdateRequest;
 import com.develop.liveTogether.application.house.dto.response.HouseDetailResponse;
 import com.develop.liveTogether.application.house.dto.response.HouseListResponse;
 import com.develop.liveTogether.application.house.exception.FileNotExistException;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,7 +49,7 @@ public class HouseService {
     }
 
     public List<HouseListResponse> getHouseList(Pageable pageable) {
-        Slice<House> houses = houseRepository.findAll(pageable);
+        Slice<House> houses = houseRepository.findRoomGuestStatus(pageable);
 
         return houses.stream()
                 .map(HouseListResponse::toDto)
@@ -52,19 +57,33 @@ public class HouseService {
     }
 
     @Transactional
-    public Long registerHouse(String memberId, HouseRegisterRequest request,
-                              MultipartFile thumbnail, MultipartFile floorPlan,
-                              List<MultipartFile> roomFiles){
+    public HouseResponse registerHouse(String memberId, HouseRegisterRequest request,
+                MultipartFile thumbnail, MultipartFile floorPlan,
+                List<MultipartFile> roomFiles){
         Member member = memberService.findMemberById(memberId);
 
-        String houseThumbnail = saveFile(thumbnail);
-        String houseFloorPlan = saveFile(floorPlan);
+        House house = houseRepository.save(request.toEntity(member, saveFile(thumbnail), saveFile(floorPlan)));
 
-        House house = houseRepository.save(request.toEntity(member, houseThumbnail, houseFloorPlan));
+        roomService.saveRoom(request.rooms().stream().map(RoomRegisterRequest::toEntity).toList(), house, roomFiles);
 
-        roomService.saveRoom(request.rooms(), house, roomFiles);
+        return HouseResponse.builder().houseNumber(house.getHouseNumber()).build();
+    }
 
-        return house.getHouseNumber();
+    @Transactional
+    public HouseResponse updateHouse(Long houseNumber, HouseUpdateRequest request,
+                            MultipartFile thumbnail, MultipartFile floorPlan,
+                            List<MultipartFile> roomFiles) {
+        House house = findHouseById(houseNumber);
+
+        deleteFile(house.getHouseThumbnail());
+        deleteFile(house.getHouseFloorPlan());
+        roomService.deleteRooms(houseNumber);
+
+        house.updateMyHouse(request.toUpdate(saveFile(thumbnail), saveFile(floorPlan)));
+
+        roomService.saveRoom(request.rooms().stream().map(RoomUpdateRequest::toEntity).toList(), house, roomFiles);
+
+        return HouseResponse.builder().houseNumber(house.getHouseNumber()).build();
     }
 
     private House findHouseById(Long houseNumber){
@@ -88,5 +107,13 @@ public class HouseService {
         }
 
         return houseFileName;
+    }
+
+    private void deleteFile(String houseFileName) {
+        File file = new File(FileUtil.getFilePath(houseFileName));
+
+        if(file.exists()){
+            file.delete();
+        }
     }
 }

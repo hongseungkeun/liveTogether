@@ -1,6 +1,8 @@
 package com.develop.liveTogether.application.house.controller;
 
+import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
+import com.develop.liveTogether.application.house.dto.request.HouseUpdateRequest;
 import com.develop.liveTogether.application.house.dto.response.HouseDetailResponse;
 import com.develop.liveTogether.application.house.dto.response.HouseListResponse;
 import com.develop.liveTogether.application.house.service.HouseService;
@@ -10,9 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -32,7 +32,7 @@ public class HouseController {
     }
 
     @GetMapping
-    public ResponseEntity getHouseList(Pageable pageable){
+    public ResponseEntity<List<HouseListResponse>> getHouseList(Pageable pageable){
         List<HouseListResponse> houseList = houseService.getHouseList(pageable);
 
         return ResponseEntity.ok(houseList);
@@ -40,16 +40,20 @@ public class HouseController {
 
 
     @PostMapping
-    public ResponseEntity<Void> registerHouse(@LoginId String memberId, @Valid @RequestPart HouseRegisterRequest request,
+    public ResponseEntity<HouseResponse> registerHouse(@LoginId String memberId, @Valid @RequestPart HouseRegisterRequest request,
                                         @RequestPart MultipartFile houseThumbnail, @RequestPart MultipartFile houseFloorPlan,
                                         @RequestPart List<MultipartFile> roomFiles){
-        Long houseNumber = houseService.registerHouse(memberId, request, houseThumbnail, houseFloorPlan, roomFiles);
+        HouseResponse houseResponse = houseService.registerHouse(memberId, request, houseThumbnail, houseFloorPlan, roomFiles);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(houseNumber)
-                .toUri();
+        return ResponseEntity.ok(houseResponse);
+    }
 
-        return ResponseEntity.created(location).build();
+    @PutMapping("/{houseNumber}")
+    public ResponseEntity<HouseResponse> updateHouse(@PathVariable Long houseNumber, @Valid @RequestPart HouseUpdateRequest request,
+                                                     @RequestPart MultipartFile houseThumbnail, @RequestPart MultipartFile houseFloorPlan,
+                                                     @RequestPart List<MultipartFile> roomFiles){
+        HouseResponse houseResponse = houseService.updateHouse(houseNumber, request, houseThumbnail, houseFloorPlan, roomFiles);
+
+        return ResponseEntity.ok(houseResponse);
     }
 }
