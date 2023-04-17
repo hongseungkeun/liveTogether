@@ -10,7 +10,7 @@ import java.util.List;
 public record HouseDetailResponse(
         Long houseNumber,
         int houseMax,
-        Boolean houseStatus,
+        Boolean approval,
         String houseType,
         String houseAddress,
         String houseAddressDetail,
@@ -52,7 +52,7 @@ public record HouseDetailResponse(
         return HouseDetailResponse.builder()
                 .houseNumber(house.getHouseNumber())
                 .houseMax(house.getHouseFixPeopleNum())
-                .houseStatus(house.getHouseStatus())
+                .approval(house.getApproval())
                 .houseType(house.getHouseType().getType())
                 .houseAddress(house.getAddress().getHouseAddress())
                 .houseAddressDetail(house.getAddress().getHouseAddressDetail())
