@@ -18,29 +18,29 @@ public record HouseDetailResponse(
         double longitude,
         String houseLocation,
         String houseGender,
-        Boolean opAirCon,
-        Boolean opCentralHeat,
-        Boolean opLocalHeat,
-        Boolean opRefrigerator,
-        Boolean opWasher,
-        Boolean opGasRange,
-        Boolean opInduction,
-        Boolean opMicrowave,
-        Boolean opDesk,
-        Boolean opDoorLock,
-        Boolean opBed,
-        Boolean opCloset,
-        Boolean opShoes,
-        Boolean opSink,
-        Boolean opInterPhone,
-        Boolean opWindow,
-        Boolean opCctv,
-        Boolean opVeranda,
-        Boolean opDelivery,
-        Boolean opFireAlarm,
-        Boolean houseParking,
-        Boolean houseElevator,
-        Boolean housePet,
+        boolean opAirCon,
+        boolean opCentralHeat,
+        boolean opLocalHeat,
+        boolean opRefrigerator,
+        boolean opWasher,
+        boolean opGasRange,
+        boolean opInduction,
+        boolean opMicrowave,
+        boolean opDesk,
+        boolean opDoorLock,
+        boolean opBed,
+        boolean opCloset,
+        boolean opShoes,
+        boolean opSink,
+        boolean opInterPhone,
+        boolean opWindow,
+        boolean opCctv,
+        boolean opVeranda,
+        boolean opDelivery,
+        boolean opFireAlarm,
+        boolean houseParking,
+        boolean houseElevator,
+        boolean housePet,
         String houseContent,
         String houseMessage,
         String houseThumbnail,
@@ -52,7 +52,7 @@ public record HouseDetailResponse(
         return HouseDetailResponse.builder()
                 .houseNumber(house.getHouseNumber())
                 .houseMax(house.getHouseFixPeopleNum())
-                .approval(house.getApproval())
+                .approval(house.isApproval())
                 .houseType(house.getHouseType().getType())
                 .houseAddress(house.getAddress().getHouseAddress())
                 .houseAddressDetail(house.getAddress().getHouseAddressDetail())
@@ -60,29 +60,29 @@ public record HouseDetailResponse(
                 .longitude(house.getAddress().getLongitude())
                 .houseLocation(house.getAddress().getHouseLocation())
                 .houseGender(house.getHouseGender().getGender())
-                .opAirCon(house.getOption().getOpAirCon())
-                .opCentralHeat(house.getOption().getOpCentralHeat())
-                .opLocalHeat(house.getOption().getOpLocalHeat())
-                .opRefrigerator(house.getOption().getOpRefrigerator())
-                .opWasher(house.getOption().getOpWasher())
-                .opGasRange(house.getOption().getOpGasRange())
-                .opInduction(house.getOption().getOpInduction())
-                .opMicrowave(house.getOption().getOpMicrowave())
-                .opDesk(house.getOption().getOpDesk())
-                .opDoorLock(house.getOption().getOpDoorLock())
-                .opBed(house.getOption().getOpBed())
-                .opCloset(house.getOption().getOpCloset())
-                .opShoes(house.getOption().getOpShoes())
-                .opSink(house.getOption().getOpSink())
-                .opInterPhone(house.getOption().getOpInterPhone())
-                .opWindow(house.getOption().getOpWindow())
-                .opCctv(house.getOption().getOpCctv())
-                .opVeranda(house.getOption().getOpVeranda())
-                .opDelivery(house.getOption().getOpDelivery())
-                .opFireAlarm(house.getOption().getOpFireAlarm())
-                .houseParking(house.getOption().getHouseParking())
-                .houseElevator(house.getOption().getHouseElevator())
-                .housePet(house.getOption().getHousePet())
+                .opAirCon(house.getOption().isOpAirCon())
+                .opCentralHeat(house.getOption().isOpCentralHeat())
+                .opLocalHeat(house.getOption().isOpLocalHeat())
+                .opRefrigerator(house.getOption().isOpRefrigerator())
+                .opWasher(house.getOption().isOpWasher())
+                .opGasRange(house.getOption().isOpGasRange())
+                .opInduction(house.getOption().isOpInduction())
+                .opMicrowave(house.getOption().isOpMicrowave())
+                .opDesk(house.getOption().isOpDesk())
+                .opDoorLock(house.getOption().isOpDoorLock())
+                .opBed(house.getOption().isOpBed())
+                .opCloset(house.getOption().isOpCloset())
+                .opShoes(house.getOption().isOpShoes())
+                .opSink(house.getOption().isOpSink())
+                .opInterPhone(house.getOption().isOpInterPhone())
+                .opWindow(house.getOption().isOpWindow())
+                .opCctv(house.getOption().isOpCctv())
+                .opVeranda(house.getOption().isOpVeranda())
+                .opDelivery(house.getOption().isOpDelivery())
+                .opFireAlarm(house.getOption().isOpFireAlarm())
+                .houseParking(house.getOption().isHouseParking())
+                .houseElevator(house.getOption().isHouseElevator())
+                .housePet(house.getOption().isHousePet())
                 .houseContent(house.getHouseContent())
                 .houseMessage(house.getHouseMessage())
                 .houseThumbnail(house.getHouseThumbnail())
