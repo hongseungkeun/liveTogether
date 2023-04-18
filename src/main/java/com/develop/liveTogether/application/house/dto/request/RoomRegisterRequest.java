@@ -17,7 +17,7 @@ public record RoomRegisterRequest(
         @NotNull int roomArea,
         @NotBlank String roomDate
 ) {
-    public RoomRequest toEntity(){
+    public RoomRequest toRequest(){
         return RoomRequest.builder()
                 .roomName(this.roomName)
                 .roomMaxPerson(this.roomMaxPerson)
