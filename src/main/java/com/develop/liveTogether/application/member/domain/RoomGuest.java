@@ -19,7 +19,7 @@ public class RoomGuest {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long roomGuestNumber;
 	@ColumnDefault("'0'")
-	private int status;
+	private int approval;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "memberNumber")
 	private Member member;
@@ -31,12 +31,12 @@ public class RoomGuest {
 	private Room room;
 
 	@Builder
-	public RoomGuest(Long roomGuestNumber, int status,
+	public RoomGuest(Long roomGuestNumber, int approval,
 					 Member member, House house,
 					 Room room)
 	{
 		this.roomGuestNumber = roomGuestNumber;
-		this.status = status;
+		this.approval = approval;
 		this.member = member;
 		this.house = house;
 		this.room = room;
