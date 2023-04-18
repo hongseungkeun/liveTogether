@@ -4,8 +4,6 @@ import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
 import com.develop.liveTogether.application.house.dto.request.HouseUpdateRequest;
-import com.develop.liveTogether.application.house.dto.request.RoomRegisterRequest;
-import com.develop.liveTogether.application.house.dto.request.RoomUpdateRequest;
 import com.develop.liveTogether.application.house.dto.response.HouseDetailResponse;
 import com.develop.liveTogether.application.house.dto.response.HouseListResponse;
 import com.develop.liveTogether.application.house.exception.FileNotExistException;
@@ -49,7 +47,7 @@ public class HouseService {
     }
 
     public List<HouseListResponse> getHouseList(Pageable pageable) {
-        Slice<House> houses = houseRepository.findRoomGuestStatus(pageable);
+        Slice<House> houses = houseRepository.findByHouseApprovalAndRoomGuestApproval(pageable);
 
         return houses.stream()
                 .map(HouseListResponse::toDto)
@@ -64,7 +62,7 @@ public class HouseService {
 
         House house = houseRepository.save(request.toEntity(member, saveFile(thumbnail), saveFile(floorPlan)));
 
-        roomService.saveRoom(request.rooms().stream().map(RoomRegisterRequest::toEntity).toList(), house, roomFiles);
+        roomService.saveRoom(request.getRooms(), house, roomFiles);
 
         return HouseResponse.builder().houseNumber(house.getHouseNumber()).build();
     }
@@ -81,7 +79,7 @@ public class HouseService {
 
         house.updateMyHouse(request.toUpdate(saveFile(thumbnail), saveFile(floorPlan)));
 
-        roomService.saveRoom(request.rooms().stream().map(RoomUpdateRequest::toEntity).toList(), house, roomFiles);
+        roomService.saveRoom(request.getRooms(), house, roomFiles);
 
         return HouseResponse.builder().houseNumber(house.getHouseNumber()).build();
     }

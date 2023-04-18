@@ -5,6 +5,7 @@ import com.develop.liveTogether.application.house.data.Gender;
 import com.develop.liveTogether.application.house.data.HouseType;
 import com.develop.liveTogether.application.house.data.Option;
 import com.develop.liveTogether.application.house.domain.House;
+import com.develop.liveTogether.application.house.dto.RoomRequest;
 import com.develop.liveTogether.application.member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,36 +14,36 @@ import lombok.Builder;
 import java.util.List;
 
 @Builder(access = AccessLevel.PRIVATE)
-public record HouseRegisterRequest(
+public record HouseRegisterRequest (
         @NotNull HouseType houseType,
         @NotBlank String houseAddress,
         @NotBlank String houseAddressDetail,
         @NotNull double latitude,
         @NotNull double longitude,
         @NotBlank String houseLocation,
-        Boolean opAirCon,
-        Boolean opCentralHeat,
-        Boolean opLocalHeat,
-        Boolean opRefrigerator,
-        Boolean opWasher,
-        Boolean opGasRange,
-        Boolean opInduction,
-        Boolean opMicrowave,
-        Boolean opDesk,
-        Boolean opDoorLock,
-        Boolean opBed,
-        Boolean opCloset,
-        Boolean opShoes,
-        Boolean opSink,
-        Boolean opInterPhone,
-        Boolean opWindow,
-        Boolean opCctv,
-        Boolean opVeranda,
-        Boolean opDelivery,
-        Boolean opFireAlarm,
-        Boolean houseParking,
-        Boolean houseElevator,
-        Boolean housePet,
+        boolean opAirCon,
+        boolean opCentralHeat,
+        boolean opLocalHeat,
+        boolean opRefrigerator,
+        boolean opWasher,
+        boolean opGasRange,
+        boolean opInduction,
+        boolean opMicrowave,
+        boolean opDesk,
+        boolean opDoorLock,
+        boolean opBed,
+        boolean opCloset,
+        boolean opShoes,
+        boolean opSink,
+        boolean opInterPhone,
+        boolean opWindow,
+        boolean opCctv,
+        boolean opVeranda,
+        boolean opDelivery,
+        boolean opFireAlarm,
+        boolean houseParking,
+        boolean houseElevator,
+        boolean housePet,
         @NotBlank String houseContent,
         @NotBlank String houseMessage,
         @NotNull List<RoomRegisterRequest> rooms
@@ -89,6 +90,10 @@ public record HouseRegisterRequest(
                 .houseFloorPlan(houseFloorPlan)
                 .member(member)
                 .build();
+    }
+
+    public List<RoomRequest> getRooms(){
+        return this.rooms().stream().map(RoomRegisterRequest::toRequest).toList();
     }
 
     private int getHouseFixPeopleNum() {
