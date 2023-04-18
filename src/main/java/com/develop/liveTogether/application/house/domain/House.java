@@ -33,7 +33,7 @@ public class House {
 	private int houseFixPeopleNum;
 	@Column(nullable = false)
 	@ColumnDefault("0")
-	private Boolean approval;
+	private boolean approval;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private HouseType houseType;
@@ -65,7 +65,7 @@ public class House {
 
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
-				 Boolean approval, HouseType houseType,
+				 boolean approval, HouseType houseType,
 				 Gender houseGender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, String houseThumbnail,

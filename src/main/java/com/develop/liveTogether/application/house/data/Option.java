@@ -7,212 +7,116 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
-
-import java.util.Objects;
 
 @Embeddable
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DynamicInsert
 public class Option {
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opAirCon;
+    private boolean opAirCon;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opCentralHeat;
+    private boolean opCentralHeat;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opLocalHeat;
+    private boolean opLocalHeat;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opRefrigerator;
+    private boolean opRefrigerator;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opWasher;
+    private boolean opWasher;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opGasRange;
+    private boolean opGasRange;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opInduction;
+    private boolean opInduction;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opMicrowave;
+    private boolean opMicrowave;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opDesk;
+    private boolean opDesk;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opDoorLock;
+    private boolean opDoorLock;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opBed;
+    private boolean opBed;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opCloset;
+    private boolean opCloset;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opShoes;
+    private boolean opShoes;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opSink;
+    private boolean opSink;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opInterPhone;
+    private boolean opInterPhone;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opWindow;
+    private boolean opWindow;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opCctv;
+    private boolean opCctv;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opVeranda;
+    private boolean opVeranda;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opDelivery;
+    private boolean opDelivery;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean opFireAlarm;
+    private boolean opFireAlarm;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean houseParking;
+    private boolean houseParking;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean houseElevator;
+    private boolean houseElevator;
     @Column(nullable = false)
     @ColumnDefault("0")
-    private Boolean housePet;
+    private boolean housePet;
 
     @Builder
-    public Option(Boolean opAirCon, Boolean opCentralHeat,
-                  Boolean opLocalHeat, Boolean opRefrigerator,
-                  Boolean opWasher, Boolean opGasRange,
-                  Boolean opInduction, Boolean opMicrowave,
-                  Boolean opDesk, Boolean opDoorLock,
-                  Boolean opBed, Boolean opCloset,
-                  Boolean opShoes, Boolean opSink,
-                  Boolean opInterPhone, Boolean opWindow,
-                  Boolean opCctv, Boolean opVeranda,
-                  Boolean opDelivery, Boolean opFireAlarm,
-                  Boolean houseParking, Boolean houseElevator,
-                  Boolean housePet) {
-        isNullElseDefaultOpAirCon(opAirCon);
-        isNullElseDefaultOpCentralHeat(opCentralHeat);
-        isNullElseDefaultOpLocalHeat(opLocalHeat);
-        isNullElseDefaultOpRefrigerator(opRefrigerator);
-        isNullElseDefaultOpWasher(opWasher);
-        isNullElseDefaultOpGasRange(getOpGasRange());
-        isNullElseDefaultOpInduction(opInduction);
-        isNullElseDefaultOpMicrowave(opMicrowave);
-        isNullElseDefaultOpDesk(opDesk);
-        isNullElseDefaultOpDoorLock(opDoorLock);
-        isNullElseDefaultOpBed(opBed);
-        isNullElseDefaultOpCloset(opCloset);
-        isNullElseDefaultOpShoes(opShoes);
-        isNullElseDefaultOpSink(opSink);
-        isNullElseDefaultOpInterPhone(opInterPhone);
-        isNullElseDefaultOpWindow(opWindow);
-        isNullElseDefaultOpCctv(opCctv);
-        isNullElseDefaultOpVeranda(opVeranda);
-        isNullElseDefaultOpDelivery(opDelivery);
-        isNullElseDefaultOpFireAlarm(opFireAlarm);
-        isNullElseDefaultHouseParking(houseParking);
-        isNullElseDefaultHouseElevator(houseElevator);
-        isNullElseDefaultHousePet(housePet);
-    }
-
-    public void isNullElseDefaultOpAirCon(Boolean opAirCon) {
-        this.opAirCon = Objects.requireNonNullElse(opAirCon, false);
-    }
-
-    public void isNullElseDefaultOpCentralHeat(Boolean opCentralHeat) {
-        this.opCentralHeat = Objects.requireNonNullElse(opCentralHeat, false);
-    }
-
-    public void isNullElseDefaultOpLocalHeat(Boolean opLocalHeat) {
-        this.opLocalHeat = Objects.requireNonNullElse(opLocalHeat, false);
-    }
-
-    public void isNullElseDefaultOpRefrigerator(Boolean opRefrigerator) {
-        this.opRefrigerator = Objects.requireNonNullElse(opRefrigerator, false);
-    }
-
-    public void isNullElseDefaultOpWasher(Boolean opWasher) {
-        this.opWasher = Objects.requireNonNullElse(opWasher, false);
-    }
-
-    public void isNullElseDefaultOpGasRange(Boolean opGasRange) {
-        this.opGasRange = Objects.requireNonNullElse(opGasRange, false);
-    }
-
-    public void isNullElseDefaultOpInduction(Boolean opInduction) {
-        this.opInduction = Objects.requireNonNullElse(opInduction, false);
-    }
-
-    public void isNullElseDefaultOpMicrowave(Boolean opMicrowave) {
-        this.opMicrowave = Objects.requireNonNullElse(opMicrowave, false);
-    }
-
-    public void isNullElseDefaultOpDesk(Boolean opDesk) {
-        this.opDesk = Objects.requireNonNullElse(opDesk, false);
-    }
-
-    public void isNullElseDefaultOpDoorLock(Boolean opDoorLock) {
-        this.opDoorLock = Objects.requireNonNullElse(opDoorLock, false);
-    }
-
-    public void isNullElseDefaultOpBed(Boolean opBed) {
-        this.opBed = Objects.requireNonNullElse(opBed, false);
-    }
-
-    public void isNullElseDefaultOpCloset(Boolean opCloset) {
-        this.opCloset = Objects.requireNonNullElse(opCloset, false);
-    }
-
-    public void isNullElseDefaultOpShoes(Boolean opShoes) {
-        this.opShoes = Objects.requireNonNullElse(opShoes, false);
-    }
-
-    public void isNullElseDefaultOpSink(Boolean opSink) {
-        this.opSink = Objects.requireNonNullElse(opSink, false);
-    }
-
-    public void isNullElseDefaultOpInterPhone(Boolean opInterPhone) {
-        this.opInterPhone = Objects.requireNonNullElse(opInterPhone, false);
-    }
-
-    public void isNullElseDefaultOpWindow(Boolean opWindow) {
-        this.opWindow = Objects.requireNonNullElse(opWindow, false);
-    }
-
-    public void isNullElseDefaultOpCctv(Boolean opCctv) {
-        this.opCctv = Objects.requireNonNullElse(opCctv, false);
-    }
-
-    public void isNullElseDefaultOpVeranda(Boolean opVeranda) {
-        this.opVeranda = Objects.requireNonNullElse(opVeranda, false);
-    }
-
-    public void isNullElseDefaultOpDelivery(Boolean opDelivery) {
-        this.opDelivery = Objects.requireNonNullElse(opDelivery, false);
-    }
-
-    public void isNullElseDefaultOpFireAlarm(Boolean opFireAlarm) {
-        this.opFireAlarm = Objects.requireNonNullElse(opFireAlarm, false);
-    }
-
-    public void isNullElseDefaultHouseParking(Boolean houseParking) {
-        this.houseParking = Objects.requireNonNullElse(houseParking, false);
-    }
-
-    public void isNullElseDefaultHouseElevator(Boolean houseElevator) {
-        this.houseElevator = Objects.requireNonNullElse(houseElevator, false);
-    }
-
-    public void isNullElseDefaultHousePet(Boolean housePet) {
-        this.housePet = Objects.requireNonNullElse(housePet, false);
+    public Option(boolean opAirCon, boolean opCentralHeat,
+                  boolean opLocalHeat, boolean opRefrigerator,
+                  boolean opWasher, boolean opGasRange,
+                  boolean opInduction, boolean opMicrowave,
+                  boolean opDesk, boolean opDoorLock,
+                  boolean opBed, boolean opCloset,
+                  boolean opShoes, boolean opSink,
+                  boolean opInterPhone, boolean opWindow,
+                  boolean opCctv, boolean opVeranda,
+                  boolean opDelivery, boolean opFireAlarm,
+                  boolean houseParking, boolean houseElevator,
+                  boolean housePet) {
+        this.opAirCon = opAirCon;
+        this.opCentralHeat = opCentralHeat;
+        this.opLocalHeat = opLocalHeat;
+        this.opRefrigerator = opRefrigerator;
+        this.opWasher = opWasher;
+        this.opGasRange = opGasRange;
+        this.opInduction = opInduction;
+        this.opMicrowave = opMicrowave;
+        this.opDesk = opDesk;
+        this.opDoorLock = opDoorLock;
+        this.opBed = opBed;
+        this.opCloset = opCloset;
+        this.opShoes = opShoes;
+        this.opSink = opSink;
+        this.opInterPhone = opInterPhone;
+        this.opWindow = opWindow;
+        this.opCctv = opCctv;
+        this.opVeranda = opVeranda;
+        this.opDelivery = opDelivery;
+        this.opFireAlarm = opFireAlarm;
+        this.houseParking = houseParking;
+        this.houseElevator = houseElevator;
+        this.housePet = housePet;
     }
 }
