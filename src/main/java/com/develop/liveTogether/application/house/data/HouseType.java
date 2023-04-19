@@ -1,8 +1,10 @@
 package com.develop.liveTogether.application.house.data;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public enum HouseType {
     APART("아파트"),
     VILLA("빌라"),
@@ -10,8 +12,4 @@ public enum HouseType {
     ETC("기타");
 
     private final String type;
-
-    HouseType(String type) {
-        this.type = type;
-    }
 }

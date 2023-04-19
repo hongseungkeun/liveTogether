@@ -1,14 +1,13 @@
 package com.develop.liveTogether.application.member.data;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public enum MemberGender {
     MAN("남자"),
     WOMAN("여자");
-    private final String gender;
 
-    MemberGender(String gender) {
-        this.gender = gender;
-    }
+    private final String gender;
 }
