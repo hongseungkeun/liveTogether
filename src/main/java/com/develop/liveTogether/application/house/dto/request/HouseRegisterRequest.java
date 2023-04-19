@@ -21,29 +21,7 @@ public record HouseRegisterRequest (
         @NotNull double latitude,
         @NotNull double longitude,
         @NotBlank String houseLocation,
-        boolean opAirCon,
-        boolean opCentralHeat,
-        boolean opLocalHeat,
-        boolean opRefrigerator,
-        boolean opWasher,
-        boolean opGasRange,
-        boolean opInduction,
-        boolean opMicrowave,
-        boolean opDesk,
-        boolean opDoorLock,
-        boolean opBed,
-        boolean opCloset,
-        boolean opShoes,
-        boolean opSink,
-        boolean opInterPhone,
-        boolean opWindow,
-        boolean opCctv,
-        boolean opVeranda,
-        boolean opDelivery,
-        boolean opFireAlarm,
-        boolean houseParking,
-        boolean houseElevator,
-        boolean housePet,
+        Option option,
         @NotBlank String houseContent,
         @NotBlank String houseMessage,
         @NotNull List<RoomRegisterRequest> rooms
@@ -59,31 +37,7 @@ public record HouseRegisterRequest (
                         .latitude(this.latitude)
                         .longitude(this.longitude).build())
                 .houseGender(matchHouseGender())
-                .option(Option.builder()
-                        .opAirCon(this.opAirCon)
-                        .opCentralHeat(this.opCentralHeat)
-                        .opLocalHeat(this.opLocalHeat)
-                        .opRefrigerator(this.opRefrigerator)
-                        .opWasher(this.opWasher)
-                        .opGasRange(this.opGasRange)
-                        .opInduction(this.opInduction)
-                        .opMicrowave(this.opMicrowave)
-                        .opDesk(this.opDesk)
-                        .opDoorLock(this.opDoorLock)
-                        .opBed(this.opBed)
-                        .opCloset(this.opCloset)
-                        .opShoes(this.opShoes)
-                        .opSink(this.opSink)
-                        .opInterPhone(this.opInterPhone)
-                        .opWindow(this.opWindow)
-                        .opCctv(this.opCctv)
-                        .opVeranda(this.opVeranda)
-                        .opDelivery(this.opDelivery)
-                        .opFireAlarm(this.opFireAlarm)
-                        .houseParking(this.houseParking)
-                        .houseElevator(this.houseElevator)
-                        .housePet(this.housePet)
-                        .build())
+                .option(this.option)
                 .houseContent(this.houseContent)
                 .houseMessage(this.houseMessage)
                 .houseThumbnail(houseThumbnail)
