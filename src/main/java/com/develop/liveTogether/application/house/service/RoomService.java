@@ -7,6 +7,7 @@ import com.develop.liveTogether.application.house.exception.FileNotExistExceptio
 import com.develop.liveTogether.application.house.repository.RoomRepository;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
 import com.develop.liveTogether.global.util.FileUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,12 +22,9 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class RoomService {
     private final RoomRepository roomRepository;
-
-    public RoomService(RoomRepository roomRepository) {
-        this.roomRepository = roomRepository;
-    }
 
     @Transactional
     public void saveRoom(List<RoomRequest> rooms, House house, List<MultipartFile> files) {

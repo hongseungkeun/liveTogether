@@ -2,6 +2,7 @@ package com.develop.liveTogether.application.house.repository;
 
 import com.develop.liveTogether.application.house.domain.House;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -11,12 +12,9 @@ import java.util.List;
 import static com.develop.liveTogether.application.house.domain.QHouse.house;
 import static com.develop.liveTogether.application.member.domain.QRoomGuest.roomGuest;
 
+@RequiredArgsConstructor
 public class HouseCustomRepositoryImpl implements  HouseCustomRepository{
     private final JPAQueryFactory queryFactory;
-
-    public HouseCustomRepositoryImpl(JPAQueryFactory queryFactory) {
-        this.queryFactory = queryFactory;
-    }
 
     @Override
     public Slice<House> findByHouseApprovalAndRoomGuestApproval(Pageable pageable) {

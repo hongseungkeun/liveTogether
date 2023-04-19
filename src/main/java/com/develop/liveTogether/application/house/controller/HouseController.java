@@ -8,6 +8,7 @@ import com.develop.liveTogether.application.house.dto.response.HouseListResponse
 import com.develop.liveTogether.application.house.service.HouseService;
 import com.develop.liveTogether.global.annotation.LoginId;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/houses")
+@RequiredArgsConstructor
 public class HouseController {
     private final HouseService houseService;
-
-    public HouseController(HouseService houseService) {
-        this.houseService = houseService;
-    }
 
     @GetMapping("{houseNumber}")
     public ResponseEntity<HouseDetailResponse> getHouseDetail(@PathVariable Long houseNumber){

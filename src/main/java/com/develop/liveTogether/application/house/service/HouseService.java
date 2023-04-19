@@ -13,6 +13,7 @@ import com.develop.liveTogether.application.member.domain.Member;
 import com.develop.liveTogether.application.member.service.MemberService;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
 import com.develop.liveTogether.global.util.FileUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
@@ -28,17 +29,11 @@ import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class HouseService {
     private final MemberService memberService;
     private final RoomService roomService;
     private final HouseRepository houseRepository;
-
-    public HouseService(MemberService memberService, RoomService roomService,
-                        HouseRepository houseRepository) {
-        this.memberService = memberService;
-        this.roomService = roomService;
-        this.houseRepository = houseRepository;
-    }
 
     public HouseDetailResponse getHouseDetail(Long houseNumber) {
         House house = findHouseById(houseNumber);

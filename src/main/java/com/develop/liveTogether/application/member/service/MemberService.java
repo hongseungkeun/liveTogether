@@ -9,6 +9,7 @@ import com.develop.liveTogether.application.member.exception.LoginFailedExceptio
 import com.develop.liveTogether.application.member.exception.MemberNotFoundException;
 import com.develop.liveTogether.application.member.repository.MemberRepository;
 import com.develop.liveTogether.global.exception.error.ErrorCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,12 +17,9 @@ import java.util.Base64;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
 
     @Transactional
     public void signUp(JoinRequest request) {
