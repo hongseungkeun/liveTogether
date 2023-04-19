@@ -1,9 +1,6 @@
 package com.develop.liveTogether.application.house.dto.request;
 
-import com.develop.liveTogether.application.house.data.Address;
-import com.develop.liveTogether.application.house.data.Gender;
-import com.develop.liveTogether.application.house.data.HouseType;
-import com.develop.liveTogether.application.house.data.Option;
+import com.develop.liveTogether.application.house.data.*;
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.dto.RoomRequest;
 import com.develop.liveTogether.application.member.domain.Member;
@@ -29,6 +26,7 @@ public record HouseRegisterRequest (
     public House toEntity(Member member, String houseThumbnail, String houseFloorPlan) {
         return House.builder()
                 .houseFixPeopleNum(getHouseFixPeopleNum())
+                .status(Status.WAIT_APPROVAL)
                 .houseType(this.houseType)
                 .address(Address.builder()
                         .houseAddress(this.houseAddress)

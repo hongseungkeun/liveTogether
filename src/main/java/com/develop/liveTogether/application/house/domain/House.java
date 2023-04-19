@@ -1,9 +1,6 @@
 package com.develop.liveTogether.application.house.domain;
 
-import com.develop.liveTogether.application.house.data.Address;
-import com.develop.liveTogether.application.house.data.Gender;
-import com.develop.liveTogether.application.house.data.HouseType;
-import com.develop.liveTogether.application.house.data.Option;
+import com.develop.liveTogether.application.house.data.*;
 import com.develop.liveTogether.application.house.dto.HouseUpdate;
 import com.develop.liveTogether.application.member.domain.Member;
 import com.develop.liveTogether.application.member.domain.RoomGuest;
@@ -32,8 +29,8 @@ public class House {
 	@Column(nullable = false)
 	private int houseFixPeopleNum;
 	@Column(nullable = false)
-	@ColumnDefault("0")
-	private boolean approval;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private HouseType houseType;
@@ -65,7 +62,7 @@ public class House {
 
 	@Builder
 	public House(Long houseNumber, int houseFixPeopleNum,
-				 boolean approval, HouseType houseType,
+				 Status status, HouseType houseType,
 				 Gender houseGender, Address address,
 				 Option option, String houseContent,
 				 String houseMessage, String houseThumbnail,
@@ -74,7 +71,7 @@ public class House {
 				 List<RoomGuest> roomGuests) {
 		this.houseNumber = houseNumber;
 		this.houseFixPeopleNum = houseFixPeopleNum;
-		this.approval = approval;
+		this.status = status;
 		this.houseType = houseType;
 		this.houseGender = houseGender;
 		this.address = address;

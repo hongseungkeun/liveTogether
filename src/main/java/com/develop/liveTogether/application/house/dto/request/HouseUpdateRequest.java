@@ -1,9 +1,6 @@
 package com.develop.liveTogether.application.house.dto.request;
 
-import com.develop.liveTogether.application.house.data.Address;
-import com.develop.liveTogether.application.house.data.Gender;
-import com.develop.liveTogether.application.house.data.HouseType;
-import com.develop.liveTogether.application.house.data.Option;
+import com.develop.liveTogether.application.house.data.*;
 import com.develop.liveTogether.application.house.dto.HouseUpdate;
 import com.develop.liveTogether.application.house.dto.RoomRequest;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +25,7 @@ public record HouseUpdateRequest(
                 .houseType(this.houseType)
                 .houseGender(matchHouseGender())
                 .houseFixPeopleNum(getHouseFixPeopleNum())
+                .status(Status.WAIT_UPDATE)
                 .address(Address.builder()
                         .houseAddress(this.houseAddress)
                         .houseAddressDetail(this.houseAddressDetail)
