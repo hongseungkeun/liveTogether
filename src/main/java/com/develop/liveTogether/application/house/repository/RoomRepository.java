@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findAllByHouse_HouseNumber(Long houseNumber);
-    List<Room> deleteAllByHouse_HouseNumber(Long houseNumber);
+    void deleteAllByHouse_HouseNumber(Long houseNumber);
 }
