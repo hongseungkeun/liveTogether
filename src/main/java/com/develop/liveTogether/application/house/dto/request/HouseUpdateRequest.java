@@ -25,7 +25,6 @@ public record HouseUpdateRequest(
                 .houseType(this.houseType)
                 .houseGender(matchHouseGender())
                 .houseFixPeopleNum(getHouseFixPeopleNum())
-                .status(Status.WAIT_UPDATE)
                 .address(Address.builder()
                         .houseAddress(this.houseAddress)
                         .houseAddressDetail(this.houseAddressDetail)
