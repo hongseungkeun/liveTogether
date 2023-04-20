@@ -1,5 +1,6 @@
 package com.develop.liveTogether.application.house.service;
 
+import com.develop.liveTogether.application.house.data.Status;
 import com.develop.liveTogether.application.house.domain.House;
 import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
@@ -72,14 +73,21 @@ public class HouseService {
         deleteFile(house.getHouseFloorPlan());
         roomService.deleteRooms(houseNumber);
 
-        house.updateMyHouse(request.toUpdate(saveFile(thumbnail), saveFile(floorPlan)));
+        house.requestUpdate(request.toUpdate(saveFile(thumbnail), saveFile(floorPlan)));
+        house.changeStatus(Status.WAIT_UPDATE);
 
         roomService.saveRoom(request.getRooms(), house, roomFiles);
 
         return HouseResponse.builder().houseNumber(house.getHouseNumber()).build();
     }
 
-    private House findHouseById(Long houseNumber){
+    @Transactional
+    public void deleteHouse(Long houseNumber) {
+        House house = findHouseById(houseNumber);
+        house.changeStatus(Status.WAIT_DELETE);
+    }
+
+    public House findHouseById(Long houseNumber){
         return houseRepository.findById(houseNumber)
                 .orElseThrow(() -> new HouseNotFoundException(ErrorCode.HOUSE_NOT_FOUND));
     }

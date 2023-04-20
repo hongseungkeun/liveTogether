@@ -10,7 +10,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -86,7 +85,7 @@ public class House {
 		this.roomGuests = roomGuests;
 	}
 
-	public void updateMyHouse(HouseUpdate houseUpdate){
+	public void requestUpdate(HouseUpdate houseUpdate) {
 		this.houseFixPeopleNum = houseUpdate.houseFixPeopleNum();
 		this.houseGender = houseUpdate.houseGender();
 		this.houseType = houseUpdate.houseType();
@@ -96,5 +95,16 @@ public class House {
 		this.houseMessage = houseUpdate.houseMessage();
 		this.houseThumbnail = houseUpdate.houseThumbnail();
 		this.houseFloorPlan = houseUpdate.houseFloorPlan();
+	}
+
+	public void changeStatus(Status status) {
+		this.status = status;
+	}
+
+	public void changeStatus(){
+		switch(this.status){
+			case WAIT_DELETE -> this.status = Status.DELETED;
+			default -> this.status = Status.APPROVED;
+		}
 	}
 }

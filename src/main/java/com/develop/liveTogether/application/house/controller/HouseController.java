@@ -54,4 +54,11 @@ public class HouseController {
 
         return ResponseEntity.ok(houseResponse);
     }
+
+    @PatchMapping("/{houseNumber}")
+    public ResponseEntity<Void> deleteHouse(@PathVariable Long houseNumber){
+        houseService.deleteHouse(houseNumber);
+
+        return ResponseEntity.ok().build();
+    }
 }
