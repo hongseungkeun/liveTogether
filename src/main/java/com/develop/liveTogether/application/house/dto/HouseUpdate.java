@@ -11,8 +11,8 @@ import java.util.List;
 public record HouseUpdate(
         HouseType houseType,
         Gender houseGender,
-        Status status,
         int houseFixPeopleNum,
+        Status status,
         Address address,
         Option option,
         String houseContent,

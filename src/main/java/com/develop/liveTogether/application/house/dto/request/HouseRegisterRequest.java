@@ -26,7 +26,7 @@ public record HouseRegisterRequest (
     public House toEntity(Member member, String houseThumbnail, String houseFloorPlan) {
         return House.builder()
                 .houseFixPeopleNum(getHouseFixPeopleNum())
-                .status(Status.WAIT_APPROVAL)
+                .status(Status.WAIT_REGISTER)
                 .houseType(this.houseType)
                 .address(Address.builder()
                         .houseAddress(this.houseAddress)
