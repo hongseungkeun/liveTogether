@@ -6,11 +6,12 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Status {
-    WAIT_APPROVAL("승인 요청"),
-    WAIT_UPDATE("수정 요청"),
-    WAIT_DELETE("삭제 요청"),
-    APPROVED("승인"),
-    DELETED("삭제");
+    WAIT_REGISTER("등록 대기"),
+    WAIT_UPDATE("수정 대기"),
+    WAIT_DELETE("삭제 대기"),
+    ACCEPT("승인"),
+    REJECT("거부"),
+    DELETE("삭제");
 
     private final String status;
 }
