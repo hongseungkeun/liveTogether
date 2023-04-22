@@ -87,6 +87,7 @@ public class House {
 
 	public void requestUpdate(HouseUpdate houseUpdate) {
 		this.houseFixPeopleNum = houseUpdate.houseFixPeopleNum();
+		this.status = houseUpdate.status();
 		this.houseGender = houseUpdate.houseGender();
 		this.houseType = houseUpdate.houseType();
 		this.address = houseUpdate.address();
@@ -97,14 +98,7 @@ public class House {
 		this.houseFloorPlan = houseUpdate.houseFloorPlan();
 	}
 
-	public void changeStatus(Status status) {
+	public void changeStatus(Status status){
 		this.status = status;
-	}
-
-	public void changeStatus(){
-		switch(this.status){
-			case WAIT_DELETE -> this.status = Status.DELETED;
-			default -> this.status = Status.APPROVED;
-		}
 	}
 }
