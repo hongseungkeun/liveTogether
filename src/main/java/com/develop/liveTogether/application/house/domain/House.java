@@ -3,8 +3,6 @@ package com.develop.liveTogether.application.house.domain;
 import com.develop.liveTogether.application.house.data.*;
 import com.develop.liveTogether.application.house.dto.HouseUpdate;
 import com.develop.liveTogether.application.member.domain.Member;
-import com.develop.liveTogether.application.member.domain.RoomGuest;
-import com.develop.liveTogether.application.member.domain.RoomReview;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

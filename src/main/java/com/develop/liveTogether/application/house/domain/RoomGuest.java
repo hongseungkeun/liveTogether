@@ -1,7 +1,6 @@
-package com.develop.liveTogether.application.member.domain;
+package com.develop.liveTogether.application.house.domain;
 
-import com.develop.liveTogether.application.house.domain.House;
-import com.develop.liveTogether.application.house.domain.Room;
+import com.develop.liveTogether.application.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

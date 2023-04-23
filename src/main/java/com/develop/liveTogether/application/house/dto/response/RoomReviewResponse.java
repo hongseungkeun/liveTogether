@@ -1,6 +1,6 @@
 package com.develop.liveTogether.application.house.dto.response;
 
-import com.develop.liveTogether.application.member.domain.RoomReview;
+import com.develop.liveTogether.application.house.domain.RoomReview;
 import lombok.AccessLevel;
 import lombok.Builder;
 

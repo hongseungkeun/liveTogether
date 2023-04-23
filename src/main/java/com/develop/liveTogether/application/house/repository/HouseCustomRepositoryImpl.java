@@ -17,7 +17,7 @@ import java.util.List;
 
 import static com.develop.liveTogether.application.house.domain.QHouse.house;
 import static com.develop.liveTogether.application.house.domain.QRoom.room;
-import static com.develop.liveTogether.application.member.domain.QRoomGuest.roomGuest;
+import static com.develop.liveTogether.application.house.domain.QRoomGuest.roomGuest;
 
 @RequiredArgsConstructor
 public class HouseCustomRepositoryImpl implements HouseCustomRepository{
