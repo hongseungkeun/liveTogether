@@ -11,7 +11,7 @@ import lombok.Builder;
 public record RoomRegisterRequest(
         @NotBlank String roomName,
         @NotNull int roomMaxPerson,
-        Gender roomGender,
+        @NotNull Gender roomGender,
         @NotNull int roomDeposit,
         @NotNull int roomMonthly,
         @NotNull int roomArea,
