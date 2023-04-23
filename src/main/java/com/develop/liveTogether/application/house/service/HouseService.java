@@ -2,6 +2,7 @@ package com.develop.liveTogether.application.house.service;
 
 import com.develop.liveTogether.application.house.data.Status;
 import com.develop.liveTogether.application.house.domain.House;
+import com.develop.liveTogether.application.house.dto.Filters;
 import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
 import com.develop.liveTogether.application.house.dto.request.HouseUpdateRequest;
@@ -50,6 +51,14 @@ public class HouseService {
                 .toList();
     }
 
+    public List<HouseListResponse> getHouseSearchList(Filters filters, Pageable pageable) {
+        Slice<House> houses = houseRepository.findByFilters(filters, pageable);
+
+        return houses.stream()
+                .map(HouseListResponse::toDto)
+                .toList();
+    }
+
     @Transactional
     public HouseResponse registerHouse(String memberId, HouseRegisterRequest request,
                                        MultipartFile thumbnail, MultipartFile floorPlan,
@@ -69,12 +78,10 @@ public class HouseService {
                                      List<MultipartFile> roomFiles) {
         House house = findHouseById(houseNumber);
 
-        deleteFile(house.getHouseThumbnail());
-        deleteFile(house.getHouseFloorPlan());
+        deleteFile(house.getHouseThumbnail(), house.getHouseFloorPlan());
         roomService.deleteRooms(houseNumber);
 
         house.requestUpdate(request.toUpdate(saveFile(thumbnail), saveFile(floorPlan)));
-        house.changeStatus(Status.WAIT_UPDATE);
 
         roomService.saveRoom(request.getRooms(), house, roomFiles);
 
@@ -110,11 +117,13 @@ public class HouseService {
         return houseFileName;
     }
 
-    private void deleteFile(String houseFileName) {
-        File file = new File(FileUtil.getFilePath(houseFileName));
+    private void deleteFile(String ...houseFileNames) {
+        for (String houseFileName : houseFileNames) {
+            File file = new File(FileUtil.getFilePath(houseFileName));
 
-        if(file.exists()){
-            file.delete();
+            if(file.exists()){
+                file.delete();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.develop.liveTogether.application.house.controller;
 
+import com.develop.liveTogether.application.house.dto.Filters;
 import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseRegisterRequest;
 import com.develop.liveTogether.application.house.dto.request.HouseUpdateRequest;
@@ -32,6 +33,13 @@ public class HouseController {
     @GetMapping
     public ResponseEntity<List<HouseListResponse>> getHouseList(Pageable pageable){
         List<HouseListResponse> houseList = houseService.getHouseList(pageable);
+
+        return ResponseEntity.ok(houseList);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<HouseListResponse>> getHouseList(Filters filters, Pageable pageable){
+        List<HouseListResponse> houseList = houseService.getHouseSearchList(filters, pageable);
 
         return ResponseEntity.ok(houseList);
     }
