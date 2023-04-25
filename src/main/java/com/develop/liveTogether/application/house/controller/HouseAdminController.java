@@ -1,6 +1,5 @@
 package com.develop.liveTogether.application.house.controller;
 
-import com.develop.liveTogether.application.house.data.Status;
 import com.develop.liveTogether.application.house.dto.HouseResponse;
 import com.develop.liveTogether.application.house.dto.request.HouseAdminChangeStatusRequest;
 import com.develop.liveTogether.application.house.service.HouseAdminService;
