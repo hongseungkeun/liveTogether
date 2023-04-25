@@ -12,8 +12,8 @@ public record RoomResponse(
         int roomDeposit,
         int roomMonthly,
         int roomArea,
-        String roomDate) {
-
+        String roomDate
+) {
     public static RoomResponse toDto(Room room){
         return RoomResponse.builder()
                 .roomName(room.getRoomName())

@@ -4,5 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record FindIdRequest(
         @NotBlank String memberName,
-        @NotBlank String memberPhone) {
+        @NotBlank String memberPhone
+) {
 }

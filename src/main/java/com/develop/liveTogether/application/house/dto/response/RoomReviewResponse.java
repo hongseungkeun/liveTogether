@@ -10,8 +10,8 @@ public record RoomReviewResponse(
         String memberGender,
         String memberProfile,
         int star,
-        String review) {
-
+        String review
+) {
     public static RoomReviewResponse toDto(RoomReview roomReview){
         return RoomReviewResponse.builder()
                 .memberNickname(roomReview.getMember().getMemberNickname())

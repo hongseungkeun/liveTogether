@@ -16,7 +16,6 @@ public record RoomRequest(
         int roomArea,
         String roomDate
 ) {
-
     public Room toEntity(House house, String roomImg){
         return Room.builder()
                 .roomName(this.roomName)

@@ -17,7 +17,8 @@ public record JoinRequest(
         @NotBlank String memberPhone,
         @NotNull MemberGender memberGender,
         @NotBlank String memberProfile,
-        @NotNull Role memberRole) {
+        @NotNull Role memberRole
+) {
     public Member toMember(String memberPw) {
         return Member.builder()
                 .memberId(this.memberId)

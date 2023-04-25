@@ -17,7 +17,6 @@ public record RoomUpdateRequest(
         @NotNull int roomArea,
         @NotBlank String roomDate
 ) {
-
     public RoomRequest toRequest(){
         return RoomRequest.builder()
                 .roomName(this.roomName)

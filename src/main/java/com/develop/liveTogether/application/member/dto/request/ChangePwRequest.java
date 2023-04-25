@@ -4,5 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 
 public record ChangePwRequest(
         @NotBlank String memberId,
-        @NotBlank String memberPw) {
+        @NotBlank String memberPw
+) {
 }
