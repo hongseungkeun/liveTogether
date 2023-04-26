@@ -75,6 +75,14 @@ public class MemberService {
                 .orElseThrow(() -> new LoginFailedException(ErrorCode.LOGIN_FAILED));
     }
 
+    public String encodeMemberPw(String memberPw){
+        return Base64.getEncoder().encodeToString(memberPw.getBytes());
+    }
+
+    public String decodeMemberPw(String memberPw){
+        return new String(Base64.getDecoder().decode(memberPw.getBytes()));
+    }
+
     private void isDuplicated(String memberId, String memberNickname){
         isDuplicatedMemberId(memberId);
         isDuplicatedMemberNickname(memberNickname);
@@ -88,9 +96,5 @@ public class MemberService {
         }
 
         return member;
-    }
-
-    private String encodeMemberPw(String memberPw){
-        return Base64.getEncoder().encodeToString(memberPw.getBytes());
     }
 }
