@@ -2,6 +2,7 @@ package com.develop.liveTogether.application.member.domain;
 
 import com.develop.liveTogether.application.member.data.MemberGender;
 import com.develop.liveTogether.application.member.data.Role;
+import com.develop.liveTogether.application.member.dto.request.UpdateMemberInfoRequest;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,7 +27,7 @@ public class Member {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private MemberGender memberGender;
-	@Column(nullable = false, length = 1000)
+	@Column(nullable = false, length = 50)
 	private String memberProfile;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -50,5 +51,12 @@ public class Member {
 		this.memberGender = memberGender;
 		this.memberProfile = memberProfile;
 		this.memberRole = memberRole;
+	}
+
+	public void updateMyInfo(UpdateMemberInfoRequest request, String memberPw) {
+		this.memberPw = memberPw;
+		this.memberNickname = request.memberNickname();
+		this.memberPhone = request.memberPhone();
+		this.memberProfile = request.memberProfile();
 	}
 }
